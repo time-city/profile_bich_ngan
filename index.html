@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MC Bích Ngân | Ultra-Luxury Portfolio</title>
-  
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-  
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+    rel="stylesheet">
+
   <link rel="stylesheet" href="./style.css">
 </head>
+
 <body>
 
   <!-- ═══════ CURTAIN INTRO ANIMATION ═══════ -->
@@ -31,6 +35,8 @@
   <!-- Placeholders for dynamically imported sections -->
   <div id="section-1-hero"></div>
   <div id="section-2-profile"></div>
+  <div id="section-2b-education"></div>
+  <div id="section-2c-why-me"></div>
   <div id="section-3-event-1"></div>
   <div id="section-4-event-2"></div>
   <div id="section-5-event-3"></div>
@@ -61,14 +67,12 @@
       // Loading sequentially ensures the DOM is populated in the exact strict order requested
       await loadSection('section-1-hero', './src/sections/1-hero.html');
       await loadSection('section-2-profile', './src/sections/2-profile.html');
-      await loadSection('section-3-event-1', './src/sections/3-event-1.html');
-      await loadSection('section-4-event-2', './src/sections/4-event-2.html');
-      await loadSection('section-5-event-3', './src/sections/5-event-3.html');
-      await loadSection('section-6-video', './src/sections/6-video.html');
+      await loadSection('section-2b-education', './src/sections/2b-education.html');
+      await loadSection('section-2c-why-me', './src/sections/2c-why-me.html');
       await loadSection('section-7-partners-footer', './src/sections/7-partners-footer.html');
-      
+
       console.log('All sections imported successfully!');
-      
+
       // Load fade animation script after all sections are in the DOM
       const fadeScript = document.createElement('script');
       fadeScript.src = './script.js';
@@ -84,4 +88,5 @@
   </script>
 
 </body>
+
 </html>

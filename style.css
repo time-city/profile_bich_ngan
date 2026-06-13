@@ -46,7 +46,7 @@ body {
   opacity: 0;
   transform: translateY(40px);
   transition: opacity 1s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-              transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .fade-section.is-visible {
@@ -93,7 +93,7 @@ img {
 }
 
 /* Content layer sits above the overlay */
-.landscape-section > * {
+.landscape-section>* {
   position: relative;
   z-index: 2;
 }
@@ -185,7 +185,7 @@ img {
   font-size: clamp(1.4rem, 3vw, 3rem);
   color: var(--color-gold-light);
   margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
-  text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
   line-height: 1.3;
   font-style: italic;
 }
@@ -219,22 +219,69 @@ img {
 }
 
 /* =======================================
+   CURSIVE GLOW & SHINE TYPOGRAPHY
+   ======================================= */
+.cursive-shine {
+  font-family: var(--font-cursive) !important;
+  font-weight: 400 !important;
+  line-height: 1.2 !important;
+  text-transform: none !important;
+  
+  /* Hiệu ứng dát vàng và phát sáng (kế thừa từ shine-gold) */
+  background: linear-gradient(
+    to right, 
+    #b38728 0%, 
+    #fcf6ba 20%, 
+    #b38728 40%, 
+    #fbf5b7 60%, 
+    #aa771c 100%
+  );
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: shine-gold 4s linear infinite;
+  
+  /* Soft glow */
+  filter: drop-shadow(0px 2px 5px rgba(0, 0, 0, 0.8));
+  display: inline-block;
+  position: relative;
+}
+
+/* Đính thêm 1 đốm sáng lấp lánh (sparkle) trên chữ Cursive */
+.cursive-shine::after {
+  content: '✦';
+  position: absolute;
+  top: -10px;
+  right: -20px;
+  font-size: clamp(1rem, 2vw, 2rem);
+  color: var(--color-gold-light);
+  text-shadow: 0 0 10px var(--color-gold-metallic), 0 0 20px #fff;
+  animation: sparkle-twinkle 2s ease-in-out infinite alternate;
+  -webkit-text-fill-color: initial; /* Bỏ gradient của chữ để hiện màu chuẩn */
+}
+
+/* =======================================
    GLOBAL GOLD GLITTER / STARDUST LOOP
    ======================================= */
 #global-glitter {
   position: fixed;
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   pointer-events: none;
-  z-index: 8000; /* Overlays everything but below curtain */
+  z-index: 8000;
+  /* Overlays everything but below curtain */
   overflow: hidden;
 }
 
 .glitter-layer-1 {
   position: absolute;
-  width: 3px; height: 3px;
+  width: 3px;
+  height: 3px;
   background: transparent;
-  box-shadow: 
+  box-shadow:
     -40vw -35vh #fcf6ba, 35vw -45vh #d4af37, 15vw 40vh #fff,
     -45vw 25vh #fcf6ba, 40vw 10vh #d4af37, -15vw -35vh #fcf6ba,
     25vw 45vh #fff, -45vw -10vh #d4af37, 45vw 25vh #fcf6ba,
@@ -242,46 +289,70 @@ img {
     5vw -45vh #fff, -45vw -45vh #d4af37, 45vw 45vh #fcf6ba,
     0vw 0vh #d4af37, 20vw -20vh #fff, -20vw 20vh #fcf6ba;
   border-radius: 50%;
-  top: 50%; left: 50%;
+  top: 50%;
+  left: 50%;
   animation: glitterTwinkle 12s linear infinite;
 }
 
 .glitter-layer-2 {
   position: absolute;
-  width: 5px; height: 5px;
+  width: 5px;
+  height: 5px;
   background: transparent;
-  box-shadow: 
+  box-shadow:
     -30vw 40vh #d4af37, 45vw -15vh #fcf6ba, 5vw 30vh #fff,
     -45vw -30vh #d4af37, 40vw 45vh #fcf6ba, -35vw -5vh #fff,
     20vw -45vh #d4af37, -45vw 20vh #fcf6ba, 45vw -40vh #fff,
     -15vw 45vh #d4af37, 45vw 5vh #fcf6ba, -45vw -25vh #fff,
     30vw 10vh #d4af37, -10vw -40vh #fcf6ba, 10vw -10vh #fff;
   border-radius: 50%;
-  top: 50%; left: 50%;
+  top: 50%;
+  left: 50%;
   animation: glitterTwinkle 18s linear infinite reverse;
 }
 
 .glitter-layer-3 {
   position: absolute;
-  width: 2px; height: 2px;
+  width: 2px;
+  height: 2px;
   background: transparent;
-  box-shadow: 
+  box-shadow:
     -40vw -45vh #fff, 45vw 35vh #fcf6ba, 10vw -25vh #d4af37,
     -25vw 45vh #fff, 45vw -45vh #fcf6ba, -45vw 30vh #d4af37,
     35vw -45vh #fff, -10vw -40vh #fcf6ba, 45vw 15vh #d4af37,
     -45vw -35vh #fff, 25vw 45vh #fcf6ba, -40vw 15vh #d4af37,
     15vw 25vh #fff, -30vw -15vh #fcf6ba, 0vw -40vh #d4af37;
   border-radius: 50%;
-  top: 50%; left: 50%;
+  top: 50%;
+  left: 50%;
   animation: glitterTwinkle 24s linear infinite;
 }
 
 @keyframes glitterTwinkle {
-  0% { transform: translate(-50%, -50%) rotate(0deg) scale(0.8); opacity: 0.3; }
-  25% { opacity: 1; transform: translate(-50%, -50%) rotate(45deg) scale(1.2); }
-  50% { opacity: 0.4; transform: translate(-50%, -50%) rotate(90deg) scale(0.9); }
-  75% { opacity: 1; transform: translate(-50%, -50%) rotate(135deg) scale(1.1); }
-  100% { transform: translate(-50%, -50%) rotate(180deg) scale(0.8); opacity: 0.3; }
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg) scale(0.8);
+    opacity: 0.3;
+  }
+
+  25% {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(45deg) scale(1.2);
+  }
+
+  50% {
+    opacity: 0.4;
+    transform: translate(-50%, -50%) rotate(90deg) scale(0.9);
+  }
+
+  75% {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(135deg) scale(1.1);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) rotate(180deg) scale(0.8);
+    opacity: 0.3;
+  }
 }
 
 /* =======================================
@@ -479,8 +550,10 @@ img {
 
 .grid-small .passepartout {
   width: 100%;
-  height: 100%; /* Ensure it fills the cell if grid stretches */
-  aspect-ratio: 16 / 9; /* Force 16:9 frame */
+  height: 100%;
+  /* Ensure it fills the cell if grid stretches */
+  aspect-ratio: 16 / 9;
+  /* Force 16:9 frame */
   object-fit: cover;
   display: block;
 }
@@ -488,7 +561,8 @@ img {
 /* 3rd image is panoramic spanning 2 columns */
 .grid-small img:nth-child(3) {
   grid-column: span 2;
-  aspect-ratio: 32 / 9; /* Maintain horizontal span ratio */
+  aspect-ratio: 32 / 9;
+  /* Maintain horizontal span ratio */
 }
 
 /* Hide 6th image if present, as the grid only takes 5 */
@@ -582,7 +656,8 @@ img {
 
 .play-button {
   position: absolute;
-  top: 50%; left: 50%;
+  top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
   width: clamp(50px, 6vw, 80px);
   height: clamp(50px, 6vw, 80px);
@@ -634,13 +709,19 @@ img {
   gap: clamp(2rem, 4vw, 4rem);
   justify-content: space-around;
   min-width: 100%;
-  padding-right: clamp(2rem, 4vw, 4rem); /* Essential for seamless loop calculation */
+  padding-right: clamp(2rem, 4vw, 4rem);
+  /* Essential for seamless loop calculation */
   animation: scrollMarquee 18s linear infinite;
 }
 
 @keyframes scrollMarquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-100%); }
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
 }
 
 /* Optional: pause on hover */
@@ -717,8 +798,13 @@ img {
   }
 
   /* Event grids — tighter gaps */
-  .grid-5-left { gap: 6px; }
-  .grid-small { gap: 6px; }
+  .grid-5-left {
+    gap: 6px;
+  }
+
+  .grid-small {
+    gap: 6px;
+  }
 }
 
 /* =======================================
@@ -767,26 +853,20 @@ img {
 
   /* Subtle vertical fabric fold texture */
   background-image:
-    repeating-linear-gradient(
-      90deg,
+    repeating-linear-gradient(90deg,
       transparent,
       transparent 38px,
       rgba(255, 255, 255, 0.02) 38px,
-      rgba(255, 255, 255, 0.02) 40px
-    ),
-    repeating-linear-gradient(
-      90deg,
+      rgba(255, 255, 255, 0.02) 40px),
+    repeating-linear-gradient(90deg,
       transparent,
       transparent 78px,
       rgba(0, 0, 0, 0.15) 78px,
-      rgba(0, 0, 0, 0.15) 82px
-    ),
-    linear-gradient(
-      180deg,
+      rgba(0, 0, 0, 0.15) 82px),
+    linear-gradient(180deg,
       rgba(60, 10, 10, 0.9) 0%,
       rgba(26, 5, 5, 1) 40%,
-      rgba(15, 2, 2, 1) 100%
-    );
+      rgba(15, 2, 2, 1) 100%);
 }
 
 /* Left curtain leaf */
@@ -819,14 +899,12 @@ img {
   top: 0;
   width: 12px;
   height: 100%;
-  background: linear-gradient(
-    180deg,
-    rgba(252, 246, 186, 0.1) 0%,
-    rgba(212, 175, 55, 0.25) 30%,
-    rgba(179, 135, 40, 0.3) 50%,
-    rgba(212, 175, 55, 0.25) 70%,
-    rgba(252, 246, 186, 0.1) 100%
-  );
+  background: linear-gradient(180deg,
+      rgba(252, 246, 186, 0.1) 0%,
+      rgba(212, 175, 55, 0.25) 30%,
+      rgba(179, 135, 40, 0.3) 50%,
+      rgba(212, 175, 55, 0.25) 70%,
+      rgba(252, 246, 186, 0.1) 100%);
   pointer-events: none;
 }
 
@@ -843,12 +921,10 @@ img {
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: radial-gradient(
-    ellipse 60% 50% at 50% 50%,
-    rgba(212, 175, 55, 0.08) 0%,
-    rgba(43, 0, 0, 0.4) 50%,
-    rgba(0, 0, 0, 0.95) 100%
-  );
+  background: radial-gradient(ellipse 60% 50% at 50% 50%,
+      rgba(212, 175, 55, 0.08) 0%,
+      rgba(43, 0, 0, 0.4) 50%,
+      rgba(0, 0, 0, 0.95) 100%);
   opacity: 0;
   transition: opacity 1.5s ease-out;
 }
@@ -870,4 +946,661 @@ img {
 #curtain-scene.curtain-done {
   display: none !important;
   pointer-events: none;
+}
+
+/* =======================================
+   LANDSCAPE HERO LAYOUT (RED THEME)
+   ======================================= */
+.bg-hero-landscape {
+  background-image:
+    linear-gradient(rgba(43, 0, 0, 0.65), rgba(15, 0, 0, 0.85)),
+    url('./asset/background/bg_herosetion.jpg');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  overflow: visible; /* Cho phép đè section dưới */
+  padding: 0 !important;
+  color: #fff;
+}
+
+.hero-top-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 1.5rem 4%;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  font-family: var(--font-sans);
+  font-size: clamp(0.8rem, 1.2vw, 1rem);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  z-index: 10;
+}
+
+.hero-section {
+  position: relative;
+  z-index: 20; /* Cho phép Hero đè lên các section bên dưới nếu nội dung bị tràn */
+}
+
+.hero-grid-landscape {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding-left: 6%;
+}
+
+.hero-vertical-line {
+  position: absolute;
+  top: 0;
+  left: 6%;
+  width: 1px;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.5);
+  z-index: 1;
+}
+
+.hero-text-area {
+  position: relative;
+  z-index: 3;
+  width: 65%;
+  padding-left: 2rem;
+  padding-top: 5rem;
+  text-align: left; /* Ghi đè text-align: center của .hero-section */
+}
+
+.hero-title-large {
+  font-family: Impact, 'Arial Black', sans-serif;
+  font-weight: 900;
+  font-size: clamp(4rem, 8.5vw, 12rem);
+  line-height: 0.9;
+  color: #f7eed7;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.hero-title-large.cursive-shine {
+  font-size: clamp(3rem, 5.5vw, 7rem) !important;
+  line-height: 1 !important;
+  padding-top: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.hero-subtitle {
+  font-family: var(--font-sans);
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  color: #f7eed7;
+  margin-bottom: 0.5rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+.hero-tagline {
+  font-family: var(--font-serif);
+  font-size: clamp(1rem, 1.2vw, 1.2rem);
+  color: #ffd700;
+  letter-spacing: 2px;
+  margin-bottom: 1.5rem;
+  font-style: italic;
+}
+
+.hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.badge {
+  background: rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 6px 12px;
+  font-size: clamp(0.7rem, 0.9vw, 0.9rem);
+  color: #fff;
+}
+
+.hero-image-area {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 50%;
+  height: 95%; /* Không che mất top bar */
+  z-index: 2;
+  pointer-events: none;
+}
+
+.hero-portrait-cutout {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: bottom right; /* Ép hình neo sát góc dưới bên phải */
+  filter: drop-shadow(-15px 15px 30px rgba(0,0,0,0.5));
+}
+
+/* --- Personal Statement trong Hero --- */
+.hero-personal-statement {
+  margin-top: 2rem;
+  padding: 1.2rem 1.5rem;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  border-left: 3px solid var(--color-gold-metallic);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  max-width: 90%;
+  /* Giữ viền vuông (không bo góc) để nhất quán với thiết kế sắc nét */
+}
+
+.statement-title {
+  font-family: var(--font-sans);
+  font-size: clamp(0.7rem, 0.9vw, 0.85rem);
+  letter-spacing: 2px;
+  color: var(--color-gold-metallic);
+  text-transform: uppercase;
+  margin-bottom: 0.8rem;
+}
+
+.statement-en {
+  font-family: var(--font-serif);
+  font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+  font-style: italic;
+  color: #fff;
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+}
+
+.statement-vi {
+  font-family: var(--font-serif);
+  font-size: clamp(0.85rem, 1.1vw, 1rem);
+  font-style: italic;
+  line-height: 1.6;
+  
+  /* Hiệu ứng dát vàng và phát sáng */
+  background: linear-gradient(
+    to right, 
+    #bf953f, 
+    #fcf6ba, 
+    #b38728, 
+    #fbf5b7, 
+    #aa771c
+  );
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: shine-gold 4s linear infinite;
+  opacity: 0.95;
+}
+
+@keyframes shine-gold {
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+/* =======================================
+   NEW PROFILE TYPOGRAPHY (ABOUT ME)
+   ======================================= */
+.profile-kicker {
+  font-family: var(--font-sans);
+  font-size: clamp(0.85rem, 1.2vw, 1.1rem);
+  letter-spacing: 3px;
+  color: var(--color-gold-dark);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+}
+
+.profile-title-new {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 3.5vw, 4rem);
+  color: var(--color-gold-metallic);
+  margin-bottom: 0.5rem;
+  letter-spacing: 2px;
+}
+
+.profile-subtitle-new {
+  font-family: var(--font-sans);
+  font-size: clamp(1rem, 1.5vw, 1.5rem);
+  color: var(--color-text-light);
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.profile-bio-en {
+  font-family: var(--font-serif);
+  font-size: clamp(1.15rem, 1.5vw, 1.4rem);
+  font-style: italic;
+  color: #fff;
+  line-height: 1.7;
+  margin-bottom: 0.8rem;
+}
+
+.profile-bio-vi {
+  font-family: var(--font-serif);
+  font-size: clamp(1.05rem, 1.4vw, 1.3rem);
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+
+.profile-info-block {
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(5px);
+  border-left: 2px solid var(--color-gold-metallic);
+  padding: 1.5rem;
+  max-width: 85%;
+  position: relative;
+}
+
+/* Các ngôi sao lấp lánh đính trên viền trái */
+.profile-info-block::before,
+.profile-info-block::after {
+  content: '✦';
+  position: absolute;
+  color: #fff;
+  line-height: 1;
+  text-shadow: 0 0 10px var(--color-gold-metallic), 0 0 20px var(--color-gold-light);
+  animation: sparkle-twinkle 1.5s ease-in-out infinite alternate;
+  z-index: 10;
+}
+
+.profile-info-block::before {
+  top: -15px;
+  left: -13px;
+  font-size: 1.8rem;
+  color: var(--color-gold-light);
+}
+
+.profile-info-block::after {
+  bottom: -10px;
+  left: -9px;
+  font-size: 1.2rem;
+  color: #fcf6ba;
+  animation-delay: 0.7s;
+  animation-duration: 2s;
+}
+
+@keyframes sparkle-twinkle {
+  0% { 
+    transform: scale(0.8) rotate(0deg); 
+    opacity: 0.6; 
+    filter: brightness(0.8);
+  }
+  100% { 
+    transform: scale(1.3) rotate(15deg); 
+    opacity: 1; 
+    filter: brightness(1.5) drop-shadow(0 0 5px var(--color-gold-light));
+  }
+}
+
+.info-block-title {
+  font-family: var(--font-sans);
+  font-size: clamp(0.85rem, 1.2vw, 1.1rem);
+  letter-spacing: 2px;
+  color: var(--color-gold-metallic);
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+.info-block-text {
+  font-family: var(--font-sans);
+  font-size: clamp(1rem, 1.3vw, 1.2rem);
+  color: #fff;
+  line-height: 1.6;
+}
+
+.info-block-text strong {
+  color: var(--color-gold-light);
+  font-weight: 500;
+}
+
+/* =======================================
+   SECTION 2B: EDUCATION & EXPERIENCE
+   ======================================= */
+.bg-education {
+  background-image:
+    linear-gradient(rgba(26, 4, 4, 0.8), rgba(10, 0, 0, 0.95)),
+    url('./asset/background/bg_3.jpg');
+}
+
+.education-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: clamp(1.5rem, 3vw, 4rem);
+  align-items: center;
+  height: 100%;
+}
+
+.education-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.section-title-gold {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 3.5vw, 4rem);
+  color: var(--color-gold-metallic);
+  margin-bottom: 0.5rem;
+  letter-spacing: 2px;
+}
+
+.section-subtitle-light {
+  font-family: var(--font-sans);
+  font-size: clamp(1rem, 1.5vw, 1.5rem);
+  color: var(--color-text-light);
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.edu-block {
+  margin-bottom: clamp(1.5rem, 2.5vw, 2.5rem);
+}
+
+.edu-category {
+  font-family: var(--font-sans);
+  font-size: clamp(1rem, 1.2vw, 1.1rem);
+  color: var(--color-gold-light);
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+  padding-bottom: 0.5rem;
+  display: inline-block;
+}
+
+.edu-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.edu-list li {
+  margin-bottom: 1rem;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.edu-list li::before {
+  content: '✦';
+  position: absolute;
+  left: 0;
+  top: 2px;
+  color: var(--color-gold-metallic);
+  font-size: 0.9rem;
+}
+
+.edu-list li strong {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: clamp(1.1rem, 1.4vw, 1.3rem); /* Tăng kích thước */
+  color: #fff;
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+  line-height: 1.4;
+}
+
+.edu-list li span {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: clamp(1.05rem, 1.2vw, 1.15rem); /* Tăng kích thước */
+  color: rgba(255, 255, 255, 0.7);
+  font-style: italic;
+}
+
+.education-right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.edu-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, 1fr); /* Ép 3 dòng có chiều cao bằng nhau */
+  gap: clamp(10px, 2vw, 25px);
+  width: 100%;
+  height: 85%; /* Chiếm phần lớn chiều cao màn hình để không bị trống */
+  max-width: 800px;
+}
+
+.edu-gallery img {
+  width: 100%;
+  height: 100%; /* Stretch full ô grid */
+  object-fit: cover; /* Tự động crop ảnh cho vừa ô */
+  border-radius: var(--radius-soft);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.edu-gallery img:hover {
+  transform: scale(1.05);
+  border-color: var(--color-gold-light);
+  z-index: 2;
+}
+
+/* =======================================
+   SECTION 2C: WHY WORK WITH ME
+   ======================================= */
+.bg-why-me {
+  background-image:
+    linear-gradient(rgba(15, 0, 0, 0.85), rgba(43, 0, 0, 0.65)),
+    url('./asset/background/bg_1.jpg');
+}
+
+.flex-col-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding-bottom: clamp(2rem, 5vh, 4rem); /* Đẩy khối nội dung lên trên để thoáng đáy */
+}
+
+.why-me-header {
+  margin-bottom: clamp(1rem, 2vw, 2rem); /* Giảm bớt khoảng cách từ tiêu đề xuống ảnh */
+}
+
+.why-me-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(15px, 2vw, 30px);
+  width: 100%;
+  max-width: 1200px;
+}
+
+.why-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.why-img-frame {
+  width: 100%;
+  margin-bottom: 1rem; /* Giảm margin để tiết kiệm không gian dọc */
+  border-radius: var(--radius-soft);
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+}
+
+.square-frame {
+  aspect-ratio: 4 / 3; /* Đổi thành 4:3 (ngắn hơn chiều cao) để tránh đẩy text xuống quá sâu */
+  object-fit: cover;
+  object-position: top center; /* Ưu tiên giữ lại phần trên cùng của ảnh (phần đầu) */
+}
+
+.why-title {
+  font-family: var(--font-sans);
+  font-size: clamp(1rem, 1.2vw, 1.2rem);
+  color: var(--color-gold-metallic);
+  margin-bottom: 0.8rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  height: 2.5em; /* Đảm bảo các title thẳng hàng */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.why-desc-en {
+  font-family: var(--font-sans); /* Không chân (Sans-serif) */
+  font-size: clamp(0.95rem, 1.1vw, 1.15rem); /* Tăng size */
+  font-weight: 300; /* Nét thanh */
+  color: #fff;
+  margin-bottom: 0.4rem;
+  font-style: normal; /* Dáng thẳng */
+  line-height: 1.5;
+}
+
+.why-desc-vi {
+  font-family: var(--font-sans); /* Không chân (Sans-serif) */
+  font-size: clamp(0.9rem, 1vw, 1.05rem); /* Tăng size */
+  font-weight: 300; /* Nét thanh */
+  color: rgba(255, 255, 255, 0.8);
+  font-style: italic; /* In nghiêng để phân biệt với tiếng Anh */
+  line-height: 1.5;
+}
+
+/* --- ÉP TỶ LỆ LANDSCAPE VÀ SCALE CHO MOBILE/TABLET --- */
+@media (max-width: 1024px) {
+  .bg-hero-landscape, .bg-profile, .bg-education, .bg-why-me {
+    aspect-ratio: 16 / 9;
+    min-height: auto !important; /* Ghi đè 100svh của .landscape-section */
+    height: auto !important;
+    padding: 0 !important;
+  }
+  
+  /* Cố định cho Hero */
+  .hero-grid-landscape {
+    min-height: auto !important; /* QUAN TRỌNG: Gỡ bỏ 100svh ở khối con để tránh đẩy hình xuống đáy */
+    height: 100% !important;
+    position: absolute; 
+    top: 0; left: 0; right: 0; bottom: 0;
+  }
+  
+  /* Cố định cho Profile, Education & Why Me */
+  .bg-profile .landscape-inner,
+  .bg-education .landscape-inner,
+  .bg-why-me .landscape-inner {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    width: 100%;
+    max-width: none;
+    height: 100% !important;
+    padding: 0 4vw;
+  }
+  .bg-profile .profile-grid,
+  .bg-education .education-grid {
+    height: 100%;
+    gap: 3vw;
+  }
+  
+  /* Typography scale cho Profile & Education */
+  .profile-kicker { font-size: 1vw; margin-bottom: 0.5vw; }
+  .profile-title-new, .section-title-gold { font-size: 3.5vw; margin-bottom: 0.5vw; }
+  .profile-subtitle-new, .section-subtitle-light { font-size: 1.5vw; margin-bottom: 1vw; }
+  
+  .profile-bio-en { font-size: 1.3vw; margin-bottom: 0.8vw; line-height: 1.5; }
+  .profile-bio-vi { font-size: 1.1vw; margin-bottom: 1.5vw; line-height: 1.5; }
+  
+  .profile-info-block { padding: 1.5vw; border-left-width: 0.3vw; max-width: 90%; }
+  .info-block-title { font-size: 1vw; margin-bottom: 1vw; }
+  .info-block-text { font-size: 1.1vw; line-height: 1.5; }
+  
+  .bg-profile .accent-line, .bg-education .accent-line { height: 0.2vw; width: 6vw; margin-bottom: 1.5vw; }
+  
+  .bg-profile .profile-portrait-frameless {
+    max-height: 90%;
+    object-position: center bottom;
+  }
+
+  .edu-category { font-size: 1.2vw; margin-bottom: 1vw; padding-bottom: 0.5vw; }
+  .edu-list li { margin-bottom: 1vw; padding-left: 1.5vw; }
+  .edu-list li::before { font-size: 0.9vw; top: 0.2vw; }
+  .edu-list li strong { font-size: 1.2vw; margin-bottom: 0.3vw; }
+  .edu-list li span { font-size: 1.1vw; }
+  .edu-block { margin-bottom: 2vw; }
+  .edu-gallery {
+    gap: 1.5vw;
+  }
+  
+  .why-me-header { margin-bottom: 1.5vw; }
+  .why-me-grid { gap: 1.5vw; }
+  .why-title { font-size: 1.2vw; margin-bottom: 0.5vw; height: 3em; }
+  .why-desc-en { font-size: 1.1vw; margin-bottom: 0.3vw; font-weight: 300; font-family: var(--font-sans); font-style: normal; }
+  .why-desc-vi { font-size: 1vw; font-weight: 300; font-family: var(--font-sans); font-style: italic; }
+  .why-img-frame { margin-bottom: 1vw; }
+  
+  .hero-top-bar {
+    padding: 1.5vw 4vw;
+    font-size: 1.5vw;
+  }
+  
+  .hero-text-area {
+    padding-left: 2vw;
+    padding-top: 6vw;
+  }
+  
+  .hero-title-large {
+    font-size: 8.5vw;
+    margin-bottom: 1.5vw;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.8vw;
+    margin-bottom: 1vw;
+  }
+  
+  .hero-tagline {
+    font-size: 1.4vw;
+    margin-bottom: 2vw;
+  }
+  
+  .hero-badges {
+    margin-top: 1vw !important;
+    gap: 1vw;
+  }
+  
+  .badge {
+    font-size: 1vw;
+    padding: 0.8vw 1.2vw;
+  }
+  
+  .hero-personal-statement {
+    margin-top: 2vw;
+    padding: 1.5vw;
+    border-left: 0.3vw solid var(--color-gold-metallic);
+    max-width: 95%;
+  }
+  
+  .statement-title {
+    font-size: 1vw;
+    margin-bottom: 1vw;
+  }
+  
+  .statement-en {
+    font-size: 1.3vw;
+    margin-bottom: 0.8vw;
+    line-height: 1.4;
+  }
+  
+  .statement-vi {
+    font-size: 1.1vw;
+    line-height: 1.4;
+    /* Đảm bảo hiệu ứng nền hoạt động tốt trên mobile */
+    background-size: 200% auto;
+  }
 }
