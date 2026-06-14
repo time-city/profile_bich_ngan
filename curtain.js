@@ -16,6 +16,15 @@
     return;
   }
 
+  // Kiểm tra xem intro đã chạy trong phiên này chưa
+  if (sessionStorage.getItem('introPlayed')) {
+    scene.remove(); // Xóa intro ngay lập tức để vào thẳng trang
+    return;
+  }
+
+  // Đánh dấu là intro đã chạy để lần sau (như lúc refresh trang) không chạy lại nữa
+  sessionStorage.setItem('introPlayed', 'true');
+
   // Prevent scrolling during the animation
   document.body.style.overflow = 'hidden';
 

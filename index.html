@@ -37,11 +37,17 @@
   <div id="section-2-profile"></div>
   <div id="section-2b-education"></div>
   <div id="section-2c-why-me"></div>
-  <div id="section-3-event-1"></div>
-  <div id="section-4-event-2"></div>
-  <div id="section-5-event-3"></div>
-  <div id="section-6-video"></div>
+  <div id="section-3-testimonials-video"></div>
+  <div id="section-4-testimonials-image"></div>
+  <div id="section-5-event-expertise"></div>
+  <div id="section-6-stage-moments"></div>
+  <div id="section-8-featured-projects"></div>
   <div id="section-7-partners-footer"></div>
+
+  <!-- Scroll to Top Button -->
+  <button id="scrollToTopBtn" class="scroll-to-top" aria-label="Scroll to Top">
+    ↑
+  </button>
 
   <!-- JavaScript to import HTML fragments -->
   <script>
@@ -69,6 +75,11 @@
       await loadSection('section-2-profile', './src/sections/2-profile.html');
       await loadSection('section-2b-education', './src/sections/2b-education.html');
       await loadSection('section-2c-why-me', './src/sections/2c-why-me.html');
+      await loadSection('section-3-testimonials-video', './src/sections/3-testimonials-video.html');
+      await loadSection('section-4-testimonials-image', './src/sections/4-testimonials-image.html');
+      await loadSection('section-5-event-expertise', './src/sections/5-event-expertise.html');
+      await loadSection('section-6-stage-moments', './src/sections/6-stage-moments.html');
+      await loadSection('section-8-featured-projects', './src/sections/8-featured-projects.html');
       await loadSection('section-7-partners-footer', './src/sections/7-partners-footer.html');
 
       console.log('All sections imported successfully!');

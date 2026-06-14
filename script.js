@@ -93,3 +93,44 @@
     console.log(`Random hover effect active on ${galleryImages.length} images.`);
   }
 })();
+
+// --- Stage Moments Filter Logic ---
+window.filterMoments = function(category) {
+  // Update active button state
+  const buttons = document.querySelectorAll('.moments-filter .filter-btn');
+  buttons.forEach(btn => btn.classList.remove('active'));
+  event.target.classList.add('active');
+
+  // Filter items
+  const items = document.querySelectorAll('.moment-item');
+  items.forEach(item => {
+    if (category === 'all' || item.getAttribute('data-category') === category) {
+      item.classList.remove('hidden');
+    } else {
+      item.classList.add('hidden');
+    }
+  });
+};
+
+// --- Scroll To Top Logic ---
+(function() {
+  const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+
+  if (scrollToTopBtn) {
+    window.addEventListener('scroll', () => {
+      // Hiện nút khi cuộn quá 300px
+      if (window.scrollY > 300) {
+        scrollToTopBtn.classList.add('show');
+      } else {
+        scrollToTopBtn.classList.remove('show');
+      }
+    });
+
+    scrollToTopBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  }
+})();
