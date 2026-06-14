@@ -75,4 +75,21 @@
     counters.forEach(counter => countObserver.observe(counter));
     console.log(`Count-up observer attached to ${counters.length} elements.`);
   }
+
+  // --- Random Auto Hover Effect cho ảnh (Education & Why Me) ---
+  const galleryImages = document.querySelectorAll('.bg-education img, .bg-why-me img');
+  if (galleryImages.length > 0) {
+    setInterval(() => {
+      // Xóa class phát sáng ở tất cả các ảnh (để tránh lỗi dồn dập)
+      galleryImages.forEach(img => img.classList.remove('auto-hover-glow'));
+      
+      // Chọn 1 ảnh ngẫu nhiên
+      const randomIndex = Math.floor(Math.random() * galleryImages.length);
+      const randomImg = galleryImages[randomIndex];
+      
+      // Thêm class phát sáng
+      randomImg.classList.add('auto-hover-glow');
+    }, 2000); // Cứ mỗi 2 giây lại đổi ảnh phát sáng
+    console.log(`Random hover effect active on ${galleryImages.length} images.`);
+  }
 })();
