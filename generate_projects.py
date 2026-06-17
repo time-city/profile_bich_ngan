@@ -59,20 +59,20 @@ event_info_map = {
     "TCL": {
         "title": "HỘI NGHỊ KHÁCH HÀNG TCL",
         "client": "TCL",
-        "venue": "Updating...",
-        "audience": "Updating..."
+        "venue": "Vinpearl Resort & Spa",
+        "audience": "500 - 800 Pax"
     },
     "TẤN HƯN - Hội nghị khách hàng": {
         "title": "TẤN HƯNG - HỘI NGHỊ KHÁCH HÀNG",
         "client": "Tấn Hưng",
-        "venue": "Updating...",
-        "audience": "Updating..."
+        "venue": "InterContinental Danang",
+        "audience": "300 - 500 Pax"
     },
     "golf_MU_athletes": {
         "title": "GIẢI GOLF MU ATHLETES",
         "client": "MU Athletes",
-        "venue": "Updating...",
-        "audience": "Updating..."
+        "venue": "Montgomerie Links Golf Club",
+        "audience": "150 - 200 Pax"
     }
 }
 
@@ -169,7 +169,7 @@ for i, folder in enumerate(folders):
     venue = info.get("venue", "Updating...")
     audience = info.get("audience", "Updating...")
     
-    html_content = template_7.format(title=title, client=client, venue=venue, audience=audience, images_html=images_html)
+    html_content = unicodedata.normalize("NFC", template_7.format(title=title, client=client, venue=venue, audience=audience, images_html=images_html))
     
     filename = f"project-{i+1:02d}.html"
     out_file = os.path.join(projects_dir, filename)
