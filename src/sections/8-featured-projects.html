@@ -2,100 +2,21 @@
 <!-- LƯU Ý: Phần <section> bao bọc ngoài cùng chỉ cần 1 lần. 
      Bên trong có thể copy-paste nhiều khối <div class="featured-project-card"> -->
 
-<section class="featured-projects-section bg-burgundy-dark" style="padding-top: clamp(2rem, 5vw, 3rem); padding-bottom: 2rem;">
+<section class="featured-projects-section bg-burgundy-dark"
+  style="padding-top: clamp(2rem, 5vw, 3rem); padding-bottom: 2rem;">
   <div class="projects-container" style="max-width: 1400px; margin: 0 auto; padding: 0 5%;">
-    
+
     <!-- TIÊU ĐỀ SECTION -->
     <div class="section-header text-center" style="margin-bottom: 2rem;">
-      <h2 class="section-title-gold" style="font-size: clamp(1.8rem, 4vw, 3.5rem); text-align: center;">FEATURED PROJECTS</h2>
+      <h2 class="section-title-gold" style="font-size: clamp(1.8rem, 4vw, 3.5rem); text-align: center;">Featured Projects</h2>
       <h3 class="section-subtitle-light" style="margin-bottom: 1rem; text-align: center;">DỰ ÁN NỔI BẬT</h3>
       <div class="accent-line center-line" style="margin: 0 auto;"></div>
     </div>
 
-    <!-- ========================================== -->
-    <!-- BẮT ĐẦU MASTER CARD (Copy khối div này cho 16 sự kiện) -->
-    <!-- ========================================== -->
-    <div class="featured-project-card">
-      
-      <!-- CỘT TRÁI: THÔNG TIN SỰ KIỆN -->
-      <div class="project-info">
-        <!-- [1] Tên sự kiện -->
-        <h4 class="project-title">ACV - CẢNG HÀNG KHÔNG QUỐC TẾ ĐÀ NẴNG</h4>
-        
-        <!-- [2] Bảng thông tin chi tiết -->
-        <div class="project-details">
-          <div class="detail-item">
-            <span class="detail-label">Role | Vai trò</span>
-            <span class="detail-value">Master of Ceremonies / Bilingual Host</span>
-          </div>
-          <div class="detail-item">
-            <span class="detail-label">Client | Khách hàng</span>
-            <span class="detail-value">ACV</span>
-          </div>
-          <div class="detail-item">
-            <span class="detail-label">Venue | Địa điểm</span>
-            <span class="detail-value">Da Nang International Airport</span>
-          </div>
-          <div class="detail-item">
-            <span class="detail-label">Audience | Quy mô khách tham dự</span>
-            <span class="detail-value">500+ Pax</span>
-          </div>
-        </div>
-        
-        <!-- [3] Điểm nổi bật -->
-        <div class="project-highlights">
-          <span class="detail-label">Highlights | Điểm nổi bật</span>
-          <ul class="highlight-list">
-            <li>English Hosting</li>
-            <li>VIP Reception</li>
-            <li>Interactive Session</li>
-            <li>Award Ceremony</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- CỘT PHẢI: THƯ VIỆN ẢNH VÀ CLIP -->
-      <!-- CỘT PHẢI: THƯ VIỆN ẢNH VÀ MODEL CẮT NỀN -->
-      <div class="gallery-and-model">
-        
-        <!-- Cột Gallery (Mosaic 7 ảnh dính liền nhau) -->
-        <div class="project-gallery gallery-passepartout">
-          <div class="project-gallery-grid">
-            <!-- Khung Ảnh Lớn (Top - Span 2) -->
-            <div class="gallery-item">
-              <img src="./asset/Show tiếng anh/ACV - Cảng Hàng Không Quốc Tế Đà Nẵng/IMG_0241.webp" alt="ACV Event Main" class="gallery-img">
-            </div>
-            
-            <!-- 6 Khung ảnh nhỏ (Bottom) -->
-            <div class="gallery-item">
-              <img src="./asset/Show tiếng anh/ACV - Cảng Hàng Không Quốc Tế Đà Nẵng/IMG_0416.webp" alt="ACV Image 1" class="gallery-img">
-            </div>
-            <div class="gallery-item">
-              <img src="./asset/Show tiếng anh/ACV - Cảng Hàng Không Quốc Tế Đà Nẵng/IMG_0219.webp" alt="ACV Image 2" class="gallery-img">
-            </div>
-            <div class="gallery-item">
-              <img src="./asset/Show tiếng anh/ACV - Cảng Hàng Không Quốc Tế Đà Nẵng/IMG_0411.webp" alt="ACV Image 3" class="gallery-img">
-            </div>
-            <div class="gallery-item">
-              <img src="./asset/Show tiếng anh/ACV - Cảng Hàng Không Quốc Tế Đà Nẵng/IMG_0236.webp" alt="ACV Image 4" class="gallery-img">
-            </div>
-            <div class="gallery-item">
-              <img src="./asset/Show tiếng anh/ACV - Cảng Hàng Không Quốc Tế Đà Nẵng/IMG_0421.webp" alt="ACV Image 5" class="gallery-img">
-            </div>
-            <div class="gallery-item">
-              <img src="./asset/Show tiếng anh/ACV - Cảng Hàng Không Quốc Tế Đà Nẵng/IMG_0221.webp" alt="ACV Image 6" class="gallery-img">
-            </div>
-          </div>
-        </div>
-
-        <!-- Cột Model Cắt Nền -->
-        <div class="project-model">
-          <img src="./asset/model/image-Photoroom (3).png" alt="MC Bich Ngan">
-        </div>
-
-      </div>
-    </div>
-    <!-- KẾT THÚC MASTER CARD -->
+    <!-- CONTAINER CHỨA 16 DỰ ÁN (Sẽ được load động bằng JS từ thư mục components) -->
+    <div id="featured-projects-list"></div>
 
   </div>
+</section>
+</div>
 </section>

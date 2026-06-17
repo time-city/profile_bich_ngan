@@ -134,3 +134,81 @@ window.filterMoments = function(category) {
     });
   }
 })();
+
+// --- Auto-scroll & Infinite Loop cho Testimonial Swipe Carousel (Mobile) ---
+(function initTestimonialCarousel() {
+  let attempts = 0;
+  const checkInterval = setInterval(() => {
+    const bento = document.querySelector('.testi-bento');
+    if (bento) {
+      clearInterval(checkInterval);
+      
+      // Khởi tạo Infinite Loop bằng cách nhân bản các item
+      const originalItems = Array.from(bento.children);
+      if (originalItems.length === 0) return;
+
+      // Nhân bản 2 lần để có thể vuốt vô tận cả 2 chiều (trái/phải)
+      originalItems.forEach(item => bento.appendChild(item.cloneNode(true)));
+      originalItems.forEach(item => bento.appendChild(item.cloneNode(true)));
+
+      // Chờ DOM cập nhật
+      setTimeout(() => {
+        if (window.innerWidth > 768) return; // Chỉ áp dụng mobile
+        
+        // Disable smooth scroll trong CSS để jump không bị giật
+        bento.style.scrollBehavior = 'auto';
+        
+        // Tính toán kích thước của 1 block gốc (6 items)
+        const blockWidth = bento.scrollWidth / 3;
+        
+        // Di chuyển đến block giữa (để có thể lướt qua trái ngay lập tức)
+        bento.scrollLeft = blockWidth;
+
+        // Xử lý sự kiện scroll để tạo cảm giác vô tận (Seamless Loop)
+        bento.addEventListener('scroll', () => {
+          if (window.innerWidth > 768) return;
+          
+          if (bento.scrollLeft >= blockWidth * 2 - 10) {
+            // Chạm đến block cuối -> Nhảy về block giữa
+            bento.scrollLeft -= blockWidth;
+          } else if (bento.scrollLeft <= 0) {
+            // Chạm đến block đầu -> Nhảy tới block giữa
+            bento.scrollLeft += blockWidth;
+          }
+        });
+
+        // Tự động cuộn (Auto-scroll) mỗi 3 giây thay vì 10s cho nhanh
+        let autoScrollTimer;
+        let isPaused = false;
+
+        const startScroll = () => {
+          clearInterval(autoScrollTimer);
+          autoScrollTimer = setInterval(() => {
+            if (window.innerWidth <= 768 && !isPaused) {
+              const item = bento.querySelector('.testi-item');
+              const gap = parseFloat(getComputedStyle(bento).gap) || 16;
+              const itemWidth = item.offsetWidth + gap;
+              
+              // Cuộn sang phải bằng JS smooth
+              bento.scrollBy({ left: itemWidth, behavior: 'smooth' }); 
+            }
+          }, 3000); // Tăng tốc độ tự động lướt lên 3s để khách thấy hiệu ứng
+        };
+
+        startScroll();
+
+        // Tạm dừng khi người dùng đang vuốt
+        bento.addEventListener('touchstart', () => { isPaused = true; }, {passive: true});
+        bento.addEventListener('touchend', () => { 
+          setTimeout(() => { isPaused = false; }, 3000); 
+        }, {passive: true});
+
+      }, 100);
+
+      console.log('Testimonial infinite auto-scroll initialized.');
+    } else {
+      attempts++;
+      if (attempts > 20) clearInterval(checkInterval);
+    }
+  }, 500);
+})();

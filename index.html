@@ -80,6 +80,34 @@
       await loadSection('section-5-event-expertise', './src/sections/5-event-expertise.html');
       await loadSection('section-6-stage-moments', './src/sections/6-stage-moments.html');
       await loadSection('section-8-featured-projects', './src/sections/8-featured-projects.html');
+      
+      // Load 16 featured project components dynamically
+      const projectFiles = [
+        'project-01.html',
+        'project-02.html',
+        'project-03.html',
+        'project-04.html',
+        'project-05.html',
+        'project-06.html',
+        'project-07.html',
+        'project-08.html',
+        'project-09.html',
+        'project-10.html',
+        'project-11.html'
+      ];
+      const projectsContainer = document.getElementById('featured-projects-list');
+      if (projectsContainer) {
+        for (const file of projectFiles) {
+          try {
+            const res = await fetch('./src/components/projects/' + file);
+            if (res.ok) {
+              const html = await res.text();
+              projectsContainer.insertAdjacentHTML('beforeend', html);
+            }
+          } catch(e) { console.error('Failed to load project:', file, e); }
+        }
+      }
+
       await loadSection('section-7-partners-footer', './src/sections/7-partners-footer.html');
 
       console.log('All sections imported successfully!');

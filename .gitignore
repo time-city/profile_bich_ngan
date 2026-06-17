@@ -1,3 +1,8 @@
 node_modules/
 .DS_Store
-*.mp4
+.gemini/
+scratch/
+.env
+
+asset/Show tiếng anh/ACV - Cảng Hàng Không Quốc Tế Đà Nẵng/copy_966A6FD2-4818-41D4-A783-1D18F946C4B0.mp4
+*.mov

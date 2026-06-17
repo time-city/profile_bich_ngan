@@ -80,7 +80,7 @@ img {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  padding: clamp(3rem, 6vh, 6rem) 0;
+  padding: clamp(2rem, 3vh, 3.5rem) 0;
 }
 
 /* Dark burgundy overlay — applied via ::before pseudo */
@@ -115,69 +115,69 @@ img {
 .bg-hero {
   background-image:
     linear-gradient(rgba(43, 0, 0, 0.65), rgba(15, 0, 0, 0.85)),
-    url('./asset/background/bg_herosetion.jpg');
+    url('./asset/background/bg_herosetion.webp');
 }
 
 /* Profile */
 .bg-profile {
   background-image:
     linear-gradient(rgba(26, 4, 4, 0.75), rgba(10, 0, 0, 0.92)),
-    url('./asset/background/bg_1.jpg');
+    url('./asset/background/bg_1.webp');
 }
 
 /* Event 1 */
 .bg-event-1 {
   background-image:
     linear-gradient(rgba(43, 0, 0, 0.7), rgba(15, 0, 0, 0.9)),
-    url('./asset/background/bg_1.jpg');
+    url('./asset/background/bg_1.webp');
 }
 
 /* Event 2 */
 .bg-event-2 {
   background-image:
     linear-gradient(rgba(43, 0, 0, 0.7), rgba(15, 0, 0, 0.9)),
-    url('./asset/background/bg_2.jpg');
+    url('./asset/background/bg_2.webp');
 }
 
 /* Event 3 */
 .bg-event-3 {
   background-image:
     linear-gradient(rgba(43, 0, 0, 0.7), rgba(15, 0, 0, 0.9)),
-    url('./asset/background/bg_3.jpg');
+    url('./asset/background/bg_3.webp');
 }
 
 /* Video */
 .bg-video {
   background-image:
     linear-gradient(rgba(26, 4, 4, 0.8), rgba(10, 0, 0, 0.92)),
-    url('./asset/background/bg_2.jpg');
+    url('./asset/background/bg_2.webp');
 }
 
 /* Partners */
 .bg-partners {
   background-image:
     linear-gradient(rgba(26, 4, 4, 0.8), rgba(10, 0, 0, 0.92)),
-    url('./asset/background/bg_3.jpg');
+    url('./asset/background/bg_3.webp');
 }
 
 /* Testimonials */
 .bg-testimonials {
   background-image:
     linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-    url('./asset/background/bg_2.jpg');
+    url('./asset/background/bg_2.webp');
 }
 
 .bg-testimonials-alt {
   background-image:
     linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-    url('./asset/background/bg_1.jpg');
+    url('./asset/background/bg_1.webp');
 }
 
 /* Footer / Thank You */
 .bg-thankyou {
   background-image:
     linear-gradient(rgba(5, 1, 1, 0.8), rgba(0, 0, 0, 0.92)),
-    url('./asset/background/thankyou_section.jpg');
+    url('./asset/background/thankyou_section.webp');
 }
 
 /* =======================================
@@ -967,7 +967,7 @@ img {
 .bg-hero-landscape {
   background-image:
     linear-gradient(rgba(43, 0, 0, 0.65), rgba(15, 0, 0, 0.85)),
-    url('./asset/background/bg_herosetion.jpg');
+    url('./asset/background/bg_herosetion.webp');
   background-size: cover;
   background-position: center;
   position: relative;
@@ -1290,7 +1290,7 @@ img {
 .bg-education {
   background-image:
     linear-gradient(rgba(26, 4, 4, 0.8), rgba(10, 0, 0, 0.95)),
-    url('./asset/background/bg_3.jpg');
+    url('./asset/background/bg_3.webp');
 }
 
 .education-grid {
@@ -1308,11 +1308,27 @@ img {
 }
 
 .section-title-gold {
-  font-family: var(--font-serif);
-  font-size: clamp(2rem, 3.5vw, 4rem);
-  color: var(--color-gold-metallic);
+  font-family: var(--font-cursive);
+  font-size: clamp(3rem, 5vw, 4.5rem);
+  font-weight: 400;
   margin-bottom: 0.5rem;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
+  text-transform: none !important;
+
+  /* Hiệu ứng lấp lánh */
+  background: linear-gradient(to right,
+      #b38728 0%,
+      #fcf6ba 20%,
+      #b38728 40%,
+      #fbf5b7 60%,
+      #aa771c 100%);
+  background-size: 200% auto;
+  color: #fff;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 5s linear infinite;
+  filter: drop-shadow(0 2px 5px rgba(212, 175, 55, 0.4));
 }
 
 .section-subtitle-light {
@@ -1426,7 +1442,7 @@ img {
 .bg-why-me {
   background-image:
     linear-gradient(rgba(15, 0, 0, 0.85), rgba(43, 0, 0, 0.65)),
-    url('./asset/background/bg_1.jpg');
+    url('./asset/background/bg_1.webp');
 }
 
 .flex-col-center {
@@ -1863,7 +1879,8 @@ img {
   /* Tránh tràn nội dung ở phần Partners */
   .partners-section .landscape-inner {
     width: 90%;
-    padding: 0 15px; /* Thêm padding nhẹ hai bên */
+    padding: 0 15px;
+    /* Thêm padding nhẹ hai bên */
   }
 }
 
@@ -1886,7 +1903,8 @@ img {
   align-items: flex-end;
   /* Căn dưới cùng */
   justify-content: center;
-  overflow: hidden; /* Cắt bỏ phần trong suốt thừa nếu có */
+  overflow: hidden;
+  /* Cắt bỏ phần trong suốt thừa nếu có */
 }
 
 .testi-model-left img {
@@ -1895,7 +1913,8 @@ img {
   height: auto;
   max-height: 100%;
   object-fit: contain;
-  object-position: bottom center; /* Cố định người vào sát đáy, đẩy viền thừa lên trên */
+  object-position: bottom center;
+  /* Cố định người vào sát đáy, đẩy viền thừa lên trên */
   filter: drop-shadow(5px 5px 15px rgba(0, 0, 0, 0.4));
   /* Đổ bóng nhẹ cho ảnh tách nền */
   margin: 0;
@@ -1924,81 +1943,97 @@ img {
 }
 
 /* =======================================
-   CLIENT TESTIMONIALS (BENTO GRID)
+   CLIENT TESTIMONIALS & VIDEOS (RESPONSIVE)
    ======================================= */
+/* --- DESKTOP/TABLET (GRID) --- */
 .testi-bento {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: 250px;
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
   width: 100%;
 }
 
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
 .testi-item {
-  overflow: hidden;
-  border-radius: 12px;
+  height: clamp(200px, 45vw, 400px); 
   border: 1px solid rgba(212, 175, 55, 0.3);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
   transition: transform 0.4s ease, filter 0.4s ease, border-color 0.4s ease;
   cursor: pointer;
-  position: relative;
+  background: rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.video-wrapper {
+  border: 2px solid var(--color-gold-metallic);
+  overflow: hidden;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.8);
+  width: 100%;
 }
 
 .testi-item:hover {
-  transform: scale(1.02);
+  transform: scale(1.05);
   border-color: var(--color-gold-light);
   z-index: 10;
   box-shadow: 0 12px 35px rgba(212, 175, 55, 0.3);
 }
 
 .testi-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  width: 100%; 
+  height: 100%; 
+  object-fit: contain; 
+  display: block;
   transition: transform 0.6s ease;
 }
 
 .testi-item:hover img {
-  transform: scale(1.08);
+  transform: scale(1.02);
 }
 
-/* Bố cục bất đối xứng */
-.bento-1 {
-  grid-column: span 2;
-  grid-row: span 2;
+/* --- MOBILE (SWIPE CAROUSEL) --- */
+@media (max-width: 768px) {
+  .testi-bento {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    -webkit-overflow-scrolling: touch;
+    /* Ẩn scrollbar cho đẹp */
+    scrollbar-width: none; 
+    -ms-overflow-style: none;
+  }
+
+  .testi-bento::-webkit-scrollbar {
+    display: none;
+  }
+
+  .testi-item {
+    flex: 0 0 85%; /* Chiếm 85% chiều rộng để thấy mép của item tiếp theo (gợi ý vuốt) */
+    scroll-snap-align: center;
+    height: 60vh; /* Cao 60% màn hình để chữ to và dễ đọc nhất */
+  }
 }
 
-.bento-2 {
-  grid-column: span 1;
-  grid-row: span 1;
-}
-
-.bento-3 {
-  grid-column: span 1;
-  grid-row: span 2;
-}
-
-.bento-4 {
-  grid-column: span 1;
-  grid-row: span 1;
-}
-
-.bento-5 {
-  grid-column: span 2;
-  grid-row: span 1;
-}
-
-.bento-6 {
-  grid-column: span 2;
-  grid-row: span 1;
-}
 /* =======================================
    SECTION 5: EVENT EXPERTISE
    ======================================= */
 .bg-expertise {
   background-image:
     linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)),
-    url('./asset/background/bg_2.jpg');
+    url('./asset/background/bg_2.webp');
   background-size: cover;
   background-position: center;
   position: relative;
@@ -2012,13 +2047,20 @@ img {
 .expertise-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: minmax(200px, auto); /* Đảm bảo chiều cao tối thiểu */
+  grid-auto-rows: minmax(200px, auto);
+  /* Đảm bảo chiều cao tối thiểu */
   gap: 20px;
   width: 100%;
 }
 
-.expertise-1 { grid-column: span 2; grid-row: span 2; }
-.expertise-4 { grid-row: span 2; }
+.expertise-1 {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.expertise-4 {
+  grid-row: span 2;
+}
 
 /* Card Design (Overlay Style like Moments) */
 .expertise-card {
@@ -2026,7 +2068,7 @@ img {
   overflow: hidden;
   border-radius: 12px;
   border: 1px solid rgba(212, 175, 55, 0.4);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
   transition: transform 0.4s ease, box-shadow 0.4s ease;
   cursor: pointer;
 }
@@ -2059,13 +2101,14 @@ img {
   bottom: 0;
   left: 0;
   width: 100%;
-  background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.7) 50%, transparent 100%);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.7) 50%, transparent 100%);
   padding: 30px 15px 15px;
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  opacity: 1; /* Hiển thị vĩnh viễn */
+  opacity: 1;
+  /* Hiển thị vĩnh viễn */
 }
 
 .exp-title-en {
@@ -2087,7 +2130,8 @@ img {
 
 /* Swipe Hint */
 .swipe-hint {
-  display: none; /* Hidden by default on Desktop */
+  display: none;
+  /* Hidden by default on Desktop */
 }
 
 /* Mobile Grid Mosaic */
@@ -2104,12 +2148,13 @@ img {
   }
 
   .expertise-card {
-    border-radius: 8px; /* Bo góc nhỏ hơn cho mobile */
+    border-radius: 8px;
+    /* Bo góc nhỏ hơn cho mobile */
   }
 
   .expertise-card .expertise-text-frame {
     padding: 20px 5px 8px;
-    background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.6) 60%, transparent 100%);
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.6) 60%, transparent 100%);
   }
 
   /* Chữ siêu nhỏ cho các thẻ vuông 1x1 */
@@ -2128,11 +2173,13 @@ img {
   }
 
   /* Phục hồi font to hơn một chút cho các thẻ lớn (span 2 cột hoặc 2 hàng) */
-  .expertise-1 .exp-title-en, .expertise-4 .exp-title-en {
+  .expertise-1 .exp-title-en,
+  .expertise-4 .exp-title-en {
     font-size: clamp(0.55rem, 2vw, 0.7rem) !important;
   }
 
-  .expertise-1 .exp-title-vi, .expertise-4 .exp-title-vi {
+  .expertise-1 .exp-title-vi,
+  .expertise-4 .exp-title-vi {
     font-size: clamp(0.5rem, 1.8vw, 0.6rem) !important;
   }
 
@@ -2152,9 +2199,17 @@ img {
 }
 
 @keyframes swipe-motion {
-  0% { transform: translateX(0); }
-  50% { transform: translateX(8px); }
-  100% { transform: translateX(0); }
+  0% {
+    transform: translateX(0);
+  }
+
+  50% {
+    transform: translateX(8px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
 }
 
 /* =======================================
@@ -2186,7 +2241,8 @@ img {
   transition: all 0.3s ease;
 }
 
-.filter-btn:hover, .filter-btn.active {
+.filter-btn:hover,
+.filter-btn.active {
   background: rgba(212, 175, 55, 0.15);
   border-color: var(--color-gold-metallic);
   color: var(--color-gold-light);
@@ -2205,7 +2261,7 @@ img {
   overflow: hidden;
   border-radius: 12px;
   border: 1px solid rgba(212, 175, 55, 0.4);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
   transition: opacity 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease;
   cursor: pointer;
 }
@@ -2228,13 +2284,15 @@ img {
   bottom: 0;
   left: 0;
   width: 100%;
-  background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
   color: var(--color-gold-light);
   font-family: var(--font-cursive);
   font-size: 1.1rem;
   padding: 20px 15px 10px;
-  opacity: 1; /* Hiển thị vĩnh viễn */
-  transform: translateY(0); /* Không bị trượt */
+  opacity: 1;
+  /* Hiển thị vĩnh viễn */
+  transform: translateY(0);
+  /* Không bị trượt */
   transition: all 0.4s ease;
   text-align: center;
 }
@@ -2242,8 +2300,14 @@ img {
 /* Hover Effects Removed */
 
 /* Asymmetric Mosaic Grid */
-.moment-1 { grid-column: span 2; grid-row: span 2; }
-.moment-4 { grid-row: span 2; }
+.moment-1 {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.moment-4 {
+  grid-row: span 2;
+}
 
 /* Filter Hidden State */
 .moment-item.hidden {
@@ -2258,7 +2322,7 @@ img {
     grid-auto-rows: minmax(80px, auto);
     gap: 8px;
   }
-  
+
   .moment-item {
     width: 100%;
   }
@@ -2290,9 +2354,11 @@ img {
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+
   .moments-filter::-webkit-scrollbar {
     display: none;
   }
+
   .filter-btn {
     white-space: nowrap;
   }
@@ -2355,23 +2421,79 @@ img {
 }
 
 .featured-project-card {
+  position: relative; /* Quan trọng để làm mỏ neo cho decor text */
   display: grid;
-  grid-template-columns: 1fr; /* Xếp dọc: Info trên, Gallery dưới */
-  gap: 1rem; /* Giảm gap giữa Info và Gallery */
-  margin-bottom: 2rem; /* Giảm margin để tránh khoảng trống lơ lửng */
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 2rem 1.5rem; /* Giảm padding để thu gọn chiều dọc */
+  border: 1px solid rgba(212, 175, 55, 0.15); /* Viền mỏng toàn khu vực */
+  border-radius: 16px;
+  background: rgba(10, 0, 0, 0.4);
+}
+
+/* --- Decor Text Floating Around --- */
+.decor-text {
+  position: absolute;
+  color: var(--color-gold-metallic, #d4af37);
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-family: var(--font-heading);
+  opacity: 0.8;
+  white-space: nowrap;
+}
+
+/* Các vị trí cụ thể (căn giữa chính xác lên đường viền) */
+.decor-top-left {
+  top: 0;
+  left: 30px;
+  transform: translateY(-50%);
+  transform-origin: center;
+  background: #0a0000;
+  padding: 0 10px;
+}
+
+.decor-top-right {
+  top: 100px;
+  right: 0;
+  transform: translateX(50%) rotate(90deg);
+  transform-origin: center;
+  background: #0a0000;
+  padding: 0 10px;
+}
+
+.decor-bottom-left {
+  bottom: 100px;
+  left: 0;
+  transform: translateX(-50%) rotate(-90deg);
+  transform-origin: center;
+  background: #0a0000;
+  padding: 0 10px;
+}
+
+.decor-bottom-right {
+  bottom: 0;
+  right: 30px;
+  transform: translateY(50%);
+  transform-origin: center;
+  background: #0a0000;
+  padding: 0 10px;
 }
 
 /* --- Project Info (Cột Trái) --- */
 .project-info {
   display: flex;
   flex-direction: column;
-  gap: 0.8rem; /* Giảm gap giữa các dòng text */
+  gap: 0.8rem;
+  /* Giảm gap giữa các dòng text */
 }
 
 .project-title {
   color: var(--color-gold-metallic, #D4AF37);
   font-family: var(--font-heading);
-  font-size: clamp(1.4rem, 2vw, 1.8rem); /* Nhỏ hơn trước */
+  font-size: clamp(1.4rem, 2vw, 1.8rem);
+  /* Nhỏ hơn trước */
   text-transform: uppercase;
   letter-spacing: 2px;
   margin-bottom: 0.2rem;
@@ -2380,7 +2502,8 @@ img {
 
 .project-details {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* Dàn đều 4 cột trên Desktop */
+  grid-template-columns: 1fr 1fr;
+  /* Dàn 2 cột trên Desktop (2x2 Grid) */
   gap: 1.2rem;
 }
 
@@ -2391,7 +2514,8 @@ img {
 
 .detail-label {
   color: var(--color-gold-light, #f1e5ac);
-  font-size: 0.75rem; /* Nhỏ lại */
+  font-size: 0.75rem;
+  /* Nhỏ lại */
   text-transform: uppercase;
   letter-spacing: 1px;
   margin-bottom: 0.2rem;
@@ -2400,83 +2524,69 @@ img {
 
 .detail-value {
   color: #fff;
-  font-size: 0.95rem; /* Nhỏ lại */
+  font-size: 0.95rem;
+  /* Nhỏ lại */
   font-weight: 300;
-}
-
-.project-highlights {
-  margin-top: 1rem;
-}
-
-.highlight-list {
-  list-style: none;
-  padding: 0;
-  margin: 1rem 0 0 0;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr); /* Dàn đều 4 cột trên Desktop */
-  gap: 1rem;
-}
-
-.highlight-list li {
-  color: #fff;
-  font-size: 0.95rem; /* Nhỏ lại */
-  font-weight: 300;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.highlight-list li::before {
-  content: '✦';
-  color: var(--color-gold-metallic);
-  font-size: 1rem; /* Nhỏ lại */
 }
 
 /* --- Project Gallery & Model Container --- */
 .gallery-and-model {
   display: flex;
-  align-items: stretch; /* Đổi thành stretch để 2 cột cao bằng nhau */
+  align-items: stretch;
+  /* Đổi thành stretch để 2 cột cao bằng nhau */
   gap: 2rem;
 }
 
+.featured-project-card.reverse .gallery-and-model {
+  flex-direction: row-reverse;
+}
+
 .project-gallery {
-  flex: 2; /* Để lại một phần lớn không gian cho model */
+  flex: 2;
+  /* Để lại một phần lớn không gian cho model */
   /* Di chuyển grid vào project-gallery-grid */
 }
 
 .project-gallery-grid {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  gap: 1px; /* Khoảng cách nhỏ để lộ nền tạo thành viền */
-  background-color: rgba(212, 175, 55, 0.5); /* Màu viền vàng nhẹ giữa các ảnh */
-  border-radius: 8px; /* Khớp với góc của viền ngoài passepartout */
+  gap: 1px;
+  /* Khoảng cách nhỏ để lộ nền tạo thành viền */
+  background-color: rgba(212, 175, 55, 0.5);
+  /* Màu viền vàng nhẹ giữa các ảnh */
+  border-radius: 8px;
+  /* Khớp với góc của viền ngoài passepartout */
   overflow: hidden;
   height: 100%;
 }
 
 .project-model {
-  flex: 1.2; /* Tăng không gian cho model */
-  display: flex;
-  justify-content: center;
-  align-items: flex-end; /* Ảnh canh dưới cùng */
+  flex: 1.2;
+  /* Tăng không gian cho model */
+  position: relative;
+  /* Để ảnh absolute định vị theo thẻ này */
 }
 
 .project-model img {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 100%; /* Chiều cao tối đa bằng gallery */
-  max-width: none; /* Bỏ giới hạn chiều rộng */
-  object-fit: contain;
-  object-position: bottom right; /* Ảnh tựa vào mép phải bên dưới */
-  filter: drop-shadow(-10px 10px 20px rgba(0,0,0,0.6));
-  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%);
-  mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%);
+  height: 100%;
+  /* Bỏ giới hạn chiều rộng */
+  object-fit: cover;
+  object-position: top center;
+  /* Ảnh cắt bớt chân bên dưới nếu quá dài */
+  filter: drop-shadow(-10px 10px 20px rgba(0, 0, 0, 0.6));
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 85%, rgba(0, 0, 0, 0) 100%);
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 85%, rgba(0, 0, 0, 0) 100%);
 }
 
 /* Hàng 1: 2 ảnh */
 .project-gallery-grid .gallery-item:nth-child(1),
 .project-gallery-grid .gallery-item:nth-child(2) {
   grid-column: span 3;
-  aspect-ratio: 4/3;
+  aspect-ratio: 16/9;
 }
 
 /* Hàng 2: 3 ảnh */
@@ -2484,14 +2594,15 @@ img {
 .project-gallery-grid .gallery-item:nth-child(4),
 .project-gallery-grid .gallery-item:nth-child(5) {
   grid-column: span 2;
-  aspect-ratio: 1; /* Hình vuông */
+  aspect-ratio: 4/3;
+  /* Hình ngang nhẹ thay vì vuông */
 }
 
 /* Hàng 3: 2 ảnh */
 .project-gallery-grid .gallery-item:nth-child(6),
 .project-gallery-grid .gallery-item:nth-child(7) {
   grid-column: span 3;
-  aspect-ratio: 4/3;
+  aspect-ratio: 16/9;
 }
 
 .gallery-passepartout {
@@ -2499,13 +2610,14 @@ img {
   border-radius: 12px;
   padding: 4px;
   box-shadow: 0 10px 30px rgba(212, 175, 55, 0.15);
-  background-color: rgba(0,0,0,0.3);
+  background-color: rgba(0, 0, 0, 0.3);
   position: relative;
   overflow: hidden;
 }
 
 .gallery-video {
-  grid-column: span 6; /* Nếu có video, nó sẽ full width */
+  grid-column: span 6;
+  /* Nếu có video, nó sẽ full width */
   aspect-ratio: 16/9;
 }
 
@@ -2518,7 +2630,8 @@ img {
 }
 
 .project-gallery-grid .gallery-img {
-  border-radius: 0; /* Loại bỏ góc bo tròn ở từng ảnh con vì ảnh sát mép nhau */
+  border-radius: 0;
+  /* Loại bỏ góc bo tròn ở từng ảnh con vì ảnh sát mép nhau */
 }
 
 .play-overlay {
@@ -2554,72 +2667,90 @@ img {
   color: #fff;
 }
 
+/* --- Desktop Adjustments --- */
+@media (min-width: 993px) {
+  .featured-project-card {
+    min-height: calc(100vh - 4rem);
+    align-content: center;
+  }
+}
+
 /* --- Mobile Adjustments --- */
 @media (max-width: 992px) {
   .featured-project-card {
     grid-template-columns: 1fr;
-    gap: 1rem; /* Giảm gap trên mobile */
-    margin-bottom: 2rem; /* Giảm khoảng trống dưới cùng trên mobile */
+    gap: 1rem;
+    /* Giảm gap trên mobile */
+    margin-bottom: 2rem;
+    /* Giảm khoảng trống dưới cùng trên mobile */
   }
-  
+
   /* Compact Text Info */
   .project-info {
     gap: 0.8rem;
   }
-  
+
   .project-title {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     margin-bottom: 0.2rem;
+    word-wrap: break-word;
+    line-height: 1.3;
   }
-  
+
   .project-details {
-    grid-template-columns: repeat(4, 1fr); /* 4 item trên 1 hàng ngang */
-    gap: 0.5rem;
+    grid-template-columns: 1fr 1fr;
+    /* Dàn 2 cột trên Mobile (2x2 Grid) */
+    gap: 12px;
   }
-  
+
   .detail-label {
-    font-size: 0.55rem; /* Cực nhỏ để vừa 4 cột */
-    margin-bottom: 0.1rem;
-    letter-spacing: 0;
+    font-size: 0.65rem;
+    margin-bottom: 0.2rem;
+    letter-spacing: 0.5px;
   }
-  
+
   .detail-value {
-    font-size: 0.75rem; /* Cực nhỏ để vừa 4 cột */
+    font-size: 0.75rem;
+    /* Cực nhỏ để vừa 4 cột */
     word-break: break-word;
   }
 
-  .highlight-list {
-    grid-template-columns: repeat(4, 1fr); /* 4 item trên 1 hàng ngang */
-    gap: 0.3rem;
-    margin-top: 0.5rem;
+  /* --- Decor Text Mobile Adjustments --- */
+  .featured-project-card {
+    padding: 2.5rem 1rem;
   }
 
-  .highlight-list li {
-    font-size: 0.65rem; /* Cực nhỏ */
-    flex-direction: column; /* Icon ở trên, chữ ở dưới để tiết kiệm ngang */
-    text-align: center;
-    gap: 0.2rem;
+  .decor-text {
+    font-size: 0.6rem;
+    letter-spacing: 1px;
   }
 
-  .highlight-list li::before {
-    font-size: 0.8rem;
-    margin-bottom: 0.1rem;
-  }
+  .decor-top-left { top: 0; left: 15px; transform: translateY(-50%); }
+  .decor-top-right { top: 60px; right: 0; transform: translateX(50%) rotate(90deg); }
+  .decor-bottom-left { bottom: 60px; left: 0; transform: translateX(-50%) rotate(-90deg); }
+  .decor-bottom-right { bottom: 0; right: 15px; transform: translateY(50%); }
 
   /* Gallery and Model side by side on mobile */
   .gallery-and-model {
     flex-direction: row;
-    align-items: stretch; /* Đảm bảo model cao ngang layout ảnh */
+    align-items: stretch;
+    /* Đảm bảo model cao ngang layout ảnh */
     gap: 0.5rem;
   }
 
+  .featured-project-card.reverse .gallery-and-model {
+    flex-direction: row-reverse;
+  }
+
   .project-model {
-    flex: 1.2; /* Nhường thêm chút không gian cho model trên mobile */
+    flex: 1.2;
+    /* Nhường thêm chút không gian cho model trên mobile */
   }
 
   .project-model img {
-    max-width: none; /* Bỏ giới hạn để model to hết cỡ */
-    object-position: bottom right;
+    max-width: none;
+    /* Bỏ giới hạn để model to hết cỡ */
+    object-position: top center;
   }
 
   /* Grid Layout for Gallery (No Scroll) */
@@ -2629,9 +2760,15 @@ img {
     gap: 1px;
     padding-bottom: 0;
   }
-  
+
   .gallery-video {
     grid-column: span 6;
     aspect-ratio: 16/9;
   }
+}
+
+.gallery-video {
+  grid-column: span 6;
+  aspect-ratio: 16/9;
+}
 }
