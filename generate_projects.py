@@ -76,7 +76,21 @@ event_info_map = {
     }
 }
 
-template_7 = """<div class="featured-project-card">
+model_map = {
+    "5_years_ani_ESCO_BEACH": "ESCO.webp",
+    "ACV - ẢNH VÀ CLIP": "ACV.webp",
+    "AEON VIET NAM": "AEON.webp",
+    "BĐS newtown diamon": "BDS.webp",
+    "GALA_farm": "GALA_farrm.webp",
+    "Menarini - kỷ niệm thành lập - ảnh và clip": "Menarini.webp",
+    "PANASONIC ảnh - clip": "panasonic.webp",
+    "RHB investment": "rhb.webp",
+    "TCL": "TCL.webp",
+    "TẤN HƯN - Hội nghị khách hàng": "tấn hưng.webp",
+    "golf_MU_athletes": "golf.webp"
+}
+
+template_7 = """<div class="featured-project-card {reverse_class}">
   <div class="decor-text decor-top-left">✦ English Hosting</div>
   <div class="decor-text decor-top-right">VIP Reception ✦</div>
   <div class="decor-text decor-bottom-left">✦ Interactive Session</div>
@@ -111,7 +125,7 @@ template_7 = """<div class="featured-project-card">
       </div>
     </div>
     <div class="project-model">
-      <img src="./asset/model/image-Photoroom (3).webp" alt="MC Bich Ngan">
+      <img src="./asset/model/feature/{model_image}" alt="MC Bich Ngan">
     </div>
   </div>
 </div>"""
@@ -169,7 +183,13 @@ for i, folder in enumerate(folders):
     venue = info.get("venue", "Updating...")
     audience = info.get("audience", "Updating...")
     
-    html_content = unicodedata.normalize("NFC", template_7.format(title=title, client=client, venue=venue, audience=audience, images_html=images_html))
+    model_img = model_map.get(folder, "image-Photoroom (3).webp")
+    reverse_class = "reverse" if i % 2 == 1 else ""
+    
+    html_content = unicodedata.normalize("NFC", template_7.format(
+        title=title, client=client, venue=venue, audience=audience, 
+        images_html=images_html, model_image=model_img, reverse_class=reverse_class
+    ))
     
     filename = f"project-{i+1:02d}.html"
     out_file = os.path.join(projects_dir, filename)
