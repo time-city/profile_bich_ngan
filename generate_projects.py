@@ -111,7 +111,7 @@ template_7 = """<div class="featured-project-card">
       </div>
     </div>
     <div class="project-model">
-      <img src="./asset/model/image-Photoroom (3).png" alt="MC Bich Ngan">
+      <img src="./asset/model/image-Photoroom (3).webp" alt="MC Bich Ngan">
     </div>
   </div>
 </div>"""
