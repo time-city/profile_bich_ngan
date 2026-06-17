@@ -1945,12 +1945,28 @@ img {
 /* =======================================
    CLIENT TESTIMONIALS & VIDEOS (RESPONSIVE)
    ======================================= */
-/* --- DESKTOP/TABLET (GRID) --- */
+/* --- DESKTOP/TABLET/MOBILE (SWIPE CAROUSEL) --- */
 .testi-bento {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  gap: 2rem;
+  padding-bottom: 2rem;
   width: 100%;
+  /* Tùy chỉnh thanh cuộn cho Desktop mượt mà */
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-gold-metallic) transparent;
+}
+.testi-bento::-webkit-scrollbar {
+  height: 6px;
+}
+.testi-bento::-webkit-scrollbar-track {
+  background: transparent;
+}
+.testi-bento::-webkit-scrollbar-thumb {
+  background: var(--color-gold-metallic);
+  border-radius: 10px;
 }
 
 .video-grid {
@@ -1963,7 +1979,8 @@ img {
 }
 
 .testi-item {
-  height: clamp(200px, 45vw, 400px); 
+  flex: 0 0 auto; /* Ôm sát theo chiều ngang của hình ảnh, không bị viền đen thừa */
+  height: 450px; /* Chiều cao cố định trên Desktop */
   border: 1px solid rgba(212, 175, 55, 0.3);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
   transition: transform 0.4s ease, filter 0.4s ease, border-color 0.4s ease;
@@ -1973,6 +1990,7 @@ img {
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  scroll-snap-align: center;
 }
 
 .video-wrapper {
@@ -1990,8 +2008,8 @@ img {
 }
 
 .testi-item img {
-  width: 100%; 
-  height: 100%; 
+  width: auto; /* Tự điều chỉnh theo tỷ lệ gốc */
+  height: 100%; /* Kéo dài hết chiều cao box */
   object-fit: contain; 
   display: block;
   transition: transform 0.6s ease;
@@ -2001,28 +2019,17 @@ img {
   transform: scale(1.02);
 }
 
-/* --- MOBILE (SWIPE CAROUSEL) --- */
+/* --- MOBILE SPECIFIC --- */
 @media (max-width: 768px) {
   .testi-bento {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
     gap: 1rem;
-    padding-bottom: 1rem;
-    -webkit-overflow-scrolling: touch;
-    /* Ẩn scrollbar cho đẹp */
     scrollbar-width: none; 
     -ms-overflow-style: none;
   }
-
   .testi-bento::-webkit-scrollbar {
     display: none;
   }
-
   .testi-item {
-    flex: 0 0 85%; /* Chiếm 85% chiều rộng để thấy mép của item tiếp theo (gợi ý vuốt) */
-    scroll-snap-align: center;
     height: 60vh; /* Cao 60% màn hình để chữ to và dễ đọc nhất */
   }
 }

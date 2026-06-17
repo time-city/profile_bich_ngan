@@ -153,8 +153,6 @@ window.filterMoments = function(category) {
 
       // Chờ DOM cập nhật
       setTimeout(() => {
-        if (window.innerWidth > 768) return; // Chỉ áp dụng mobile
-        
         // Disable smooth scroll trong CSS để jump không bị giật
         bento.style.scrollBehavior = 'auto';
         
@@ -166,8 +164,6 @@ window.filterMoments = function(category) {
 
         // Xử lý sự kiện scroll để tạo cảm giác vô tận (Seamless Loop)
         bento.addEventListener('scroll', () => {
-          if (window.innerWidth > 768) return;
-          
           if (bento.scrollLeft >= blockWidth * 2 - 10) {
             // Chạm đến block cuối -> Nhảy về block giữa
             bento.scrollLeft -= blockWidth;
@@ -184,7 +180,7 @@ window.filterMoments = function(category) {
         const startScroll = () => {
           clearInterval(autoScrollTimer);
           autoScrollTimer = setInterval(() => {
-            if (window.innerWidth <= 768 && !isPaused) {
+            if (!isPaused) {
               const item = bento.querySelector('.testi-item');
               const gap = parseFloat(getComputedStyle(bento).gap) || 16;
               const itemWidth = item.offsetWidth + gap;
