@@ -1,6 +1,7 @@
 import os
 import glob
 import re
+import unicodedata
 
 event_dir = '/Users/admin/Documents/profile_bich_ngan/asset/event'
 projects_dir = '/Users/admin/Documents/profile_bich_ngan/src/components/projects'
@@ -154,7 +155,7 @@ for i, folder in enumerate(folders):
     images = [f for f in os.listdir(folder_path) if f.lower().endswith(('.jpg', '.jpeg', '.png', '.webp', '.gif'))]
     images.sort()
     
-    image_paths = [f"./asset/event/{folder}/{img}" for img in images]
+    image_paths = [unicodedata.normalize("NFC", f"./asset/event/{folder}/{img}") for img in images]
     
     count = len(image_paths)
     if count == 0:
