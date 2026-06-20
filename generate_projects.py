@@ -223,7 +223,7 @@ for i, folder in enumerate(folders):
     filename = f"project-{i+1:02d}.html"
 
     folder_path = os.path.join(event_dir, folder)
-    images = [f for f in os.listdir(folder_path) if f.lower().endswith(('.jpg', '.jpeg', '.png', '.webp', '.gif'))]
+    images = [f for f in os.listdir(folder_path) if f.lower().endswith(('.webp', '.webp', '.webp', '.webp', '.gif'))]
     images.sort()
     
     image_paths = [unicodedata.normalize("NFC", f"./asset/event/{folder}/{img}") for img in images]

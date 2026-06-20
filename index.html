@@ -76,24 +76,28 @@
     }
 
     async function initializePortfolio() {
-      // Loading sequentially ensures the DOM is populated in the exact strict order requested
-      await loadSection('section-1-hero', './src/sections/1-hero.html');
-      await loadSection('section-2-profile', './src/sections/2-profile.html');
-      await loadSection('section-2b-education', './src/sections/2b-education.html');
-      await loadSection('section-7b-lookbook', './src/sections/7b-lookbook.html');
+      // Load all main sections concurrently for maximum performance
+      const sectionPromises = [
+        loadSection('section-1-hero', './src/sections/1-hero.html'),
+        loadSection('section-2-profile', './src/sections/2-profile.html'),
+        loadSection('section-2b-education', './src/sections/2b-education.html'),
+        loadSection('section-7b-lookbook', './src/sections/7b-lookbook.html'),
+        loadSection('section-2c-why-me', './src/sections/2c-why-me.html'),
+        loadSection('section-3-testimonials-video', './src/sections/3-testimonials-video.html'),
+        loadSection('section-4a-testimonials-image', './src/sections/4a-testimonials-image.html'),
+        loadSection('section-5a-event-expertise', './src/sections/5a-event-expertise.html'),
+        loadSection('section-5b-event-expertise', './src/sections/5b-event-expertise.html'),
+        loadSection('section-5c-event-expertise', './src/sections/5c-event-expertise.html'),
+        loadSection('section-6a-stage-moments', './src/sections/6a-stage-moments.html'),
+        loadSection('section-6b-stage-moments', './src/sections/6b-stage-moments.html'),
+        loadSection('section-6c-stage-moments', './src/sections/6c-stage-moments.html'),
+        loadSection('section-8-featured-projects', './src/sections/8-featured-projects.html'),
+        loadSection('section-7-partners-footer', './src/sections/7-partners-footer.html')
+      ];
 
-      await loadSection('section-2c-why-me', './src/sections/2c-why-me.html');
-      await loadSection('section-3-testimonials-video', './src/sections/3-testimonials-video.html');
-      await loadSection('section-4a-testimonials-image', './src/sections/4a-testimonials-image.html');
-      await loadSection('section-5a-event-expertise', './src/sections/5a-event-expertise.html');
-      await loadSection('section-5b-event-expertise', './src/sections/5b-event-expertise.html');
-      await loadSection('section-5c-event-expertise', './src/sections/5c-event-expertise.html');
-      await loadSection('section-6a-stage-moments', './src/sections/6a-stage-moments.html');
-      await loadSection('section-6b-stage-moments', './src/sections/6b-stage-moments.html');
-      await loadSection('section-6c-stage-moments', './src/sections/6c-stage-moments.html');
-      await loadSection('section-8-featured-projects', './src/sections/8-featured-projects.html');
+      await Promise.all(sectionPromises);
 
-      // Load 16 featured project components dynamically
+      // Load 20 featured project components concurrently
       const projectFiles = [
         'project-01.html',
         'project-02.html',
@@ -116,32 +120,31 @@
         'project-19.html',
         'project-20.html'
       ];
+      
       const projectsContainer = document.getElementById('featured-projects-list');
       if (projectsContainer) {
-        for (const file of projectFiles) {
-          try {
-            const res = await fetch('./src/components/projects/' + file);
-            if (res.ok) {
-              const html = await res.text();
-              projectsContainer.insertAdjacentHTML('beforeend', html);
-            }
-          } catch (e) { console.error('Failed to load project:', file, e); }
+        try {
+          const projectPromises = projectFiles.map(file => 
+            fetch('./src/components/projects/' + file).then(res => res.ok ? res.text() : '')
+          );
+          const projectHtmls = await Promise.all(projectPromises);
+          projectsContainer.insertAdjacentHTML('beforeend', projectHtmls.join(''));
+        } catch (e) {
+          console.error('Failed to load projects concurrently', e);
         }
       }
 
-      await loadSection('section-7-partners-footer', './src/sections/7-partners-footer.html');
-
       console.log('All sections imported successfully!');
-
-      // Load fade animation script after all sections are in the DOM
-      const fadeScript = document.createElement('script');
-      fadeScript.src = './script.js';
-      document.body.appendChild(fadeScript);
 
       // Trigger curtain intro animation after content is ready
       const curtainScript = document.createElement('script');
       curtainScript.src = './curtain.js';
       document.body.appendChild(curtainScript);
+
+      // Load additional scripts
+      const fadeScript = document.createElement('script');
+      fadeScript.src = './script.js';
+      document.body.appendChild(fadeScript);
     }
 
     initializePortfolio();

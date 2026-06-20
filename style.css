@@ -184,7 +184,7 @@ img {
 .bg-partners {
   background-image:
     linear-gradient(rgba(26, 4, 4, 0.5), rgba(10, 0, 0, 0.7)),
-    url('./asset/background/b18e718e6d2833e5d4176e154e00448b.jpg');
+    url('./asset/background/b18e718e6d2833e5d4176e154e00448b.webp');
 }
 
 /* Testimonials */
@@ -1323,7 +1323,7 @@ img {
 .bg-education {
   background-image:
     linear-gradient(rgba(10, 0, 0, 0.7), rgba(0, 0, 0, 0.85)),
-    url('./asset/background/b18e718e6d2833e5d4176e154e00448b.jpg');
+    url('./asset/background/b18e718e6d2833e5d4176e154e00448b.webp');
 }
 
 /* ---- Education Info Bar (compact pills) ---- */
@@ -2999,7 +2999,7 @@ img {
   padding-top: 2rem;
   padding-bottom: 2rem;
   background-color: #000;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('./asset/background/40cdd2b69360c5bfda6e4117ca6863da.jpg');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('./asset/background/40cdd2b69360c5bfda6e4117ca6863da.webp');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -3580,7 +3580,7 @@ img {
   position: relative;
   width: 100vw;
   margin-left: calc(-50vw + 50%);
-  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('./asset/background/b18e718e6d2833e5d4176e154e00448b.jpg');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('./asset/background/b18e718e6d2833e5d4176e154e00448b.webp');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

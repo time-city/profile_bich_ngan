@@ -1,32 +1,4 @@
-/* Fade-in / Fade-out Observer — chạy ngay lập tức vì script được load sau khi DOM đã sẵn sàng */
-(function () {
-  const sections = document.querySelectorAll(
-    '.hero-section, .profile-section, .event-section, .video-section, .partners-section, .footer-section'
-  );
-
-  if (!sections.length) {
-    console.warn('No sections found for fade effect.');
-    return;
-  }
-
-  // Gắn class ẩn ban đầu
-  sections.forEach(section => section.classList.add('fade-section'));
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-      } else {
-        entry.target.classList.remove('is-visible');
-      }
-    });
-  }, {
-    threshold: 0.1
-  });
-
-  sections.forEach(section => observer.observe(section));
-
-  console.log(`Fade observer attached to ${sections.length} sections.`);
+/* Fade-in removed to improve performance */
 
   // --- Autoplay Videos on Scroll & Prevent Black Screen ---
   const videoElements = document.querySelectorAll('video');
@@ -125,7 +97,7 @@
     }, 2000); // Cứ mỗi 2 giây lại đổi ảnh phát sáng
     console.log(`Random hover effect active on ${galleryImages.length} images.`);
   }
-})();
+
 
 // --- Stage Moments Filter Logic ---
 window.filterMoments = function(category) {
