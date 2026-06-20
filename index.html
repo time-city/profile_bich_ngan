@@ -8,11 +8,11 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Dancing+Script:wght@400;600;700&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
     rel="stylesheet">
 
   <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./cinematic.css">
 </head>
 
 <body>
@@ -35,12 +35,18 @@
   <!-- Placeholders for dynamically imported sections -->
   <div id="section-1-hero"></div>
   <div id="section-2-profile"></div>
+  <div id="section-7b-lookbook"></div>
   <div id="section-2b-education"></div>
   <div id="section-2c-why-me"></div>
   <div id="section-3-testimonials-video"></div>
-  <div id="section-4-testimonials-image"></div>
-  <div id="section-5-event-expertise"></div>
-  <div id="section-6-stage-moments"></div>
+  <div id="section-4a-testimonials-image"></div>
+  <div id="section-4b-testimonials-image"></div>
+  <div id="section-5a-event-expertise"></div>
+  <div id="section-5b-event-expertise"></div>
+  <div id="section-5c-event-expertise"></div>
+  <div id="section-6a-stage-moments"></div>
+  <div id="section-6b-stage-moments"></div>
+  <div id="section-6c-stage-moments"></div>
   <div id="section-8-featured-projects"></div>
   <div id="section-7-partners-footer"></div>
 
@@ -74,13 +80,19 @@
       await loadSection('section-1-hero', './src/sections/1-hero.html');
       await loadSection('section-2-profile', './src/sections/2-profile.html');
       await loadSection('section-2b-education', './src/sections/2b-education.html');
+      await loadSection('section-7b-lookbook', './src/sections/7b-lookbook.html');
+
       await loadSection('section-2c-why-me', './src/sections/2c-why-me.html');
       await loadSection('section-3-testimonials-video', './src/sections/3-testimonials-video.html');
-      await loadSection('section-4-testimonials-image', './src/sections/4-testimonials-image.html');
-      await loadSection('section-5-event-expertise', './src/sections/5-event-expertise.html');
-      await loadSection('section-6-stage-moments', './src/sections/6-stage-moments.html');
+      await loadSection('section-4a-testimonials-image', './src/sections/4a-testimonials-image.html');
+      await loadSection('section-5a-event-expertise', './src/sections/5a-event-expertise.html');
+      await loadSection('section-5b-event-expertise', './src/sections/5b-event-expertise.html');
+      await loadSection('section-5c-event-expertise', './src/sections/5c-event-expertise.html');
+      await loadSection('section-6a-stage-moments', './src/sections/6a-stage-moments.html');
+      await loadSection('section-6b-stage-moments', './src/sections/6b-stage-moments.html');
+      await loadSection('section-6c-stage-moments', './src/sections/6c-stage-moments.html');
       await loadSection('section-8-featured-projects', './src/sections/8-featured-projects.html');
-      
+
       // Load 16 featured project components dynamically
       const projectFiles = [
         'project-01.html',
@@ -93,7 +105,16 @@
         'project-08.html',
         'project-09.html',
         'project-10.html',
-        'project-11.html'
+        'project-11.html',
+        'project-12.html',
+        'project-13.html',
+        'project-14.html',
+        'project-15.html',
+        'project-16.html',
+        'project-17.html',
+        'project-18.html',
+        'project-19.html',
+        'project-20.html'
       ];
       const projectsContainer = document.getElementById('featured-projects-list');
       if (projectsContainer) {
@@ -104,7 +125,7 @@
               const html = await res.text();
               projectsContainer.insertAdjacentHTML('beforeend', html);
             }
-          } catch(e) { console.error('Failed to load project:', file, e); }
+          } catch (e) { console.error('Failed to load project:', file, e); }
         }
       }
 

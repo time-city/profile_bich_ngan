@@ -1,0 +1,572 @@
+/* =======================================
+   CINEMATIC & LUXURY MINIMALIST FRAMEWORK
+   ======================================= */
+
+/* Force landscape ratio on all devices */
+.cinematic-slide {
+  width: 100vw !important;
+  max-width: 100vw !important;
+  height: auto !important;
+  /* Let it expand for text */
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  /* Allow 3D elements to pop out */
+  overflow: visible !important;
+  position: relative;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.landscape-inner,
+.expertise-inner {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Image containers get the strict aspect ratio to prevent vertical scrolling */
+.cinematic-grid-2x2,
+.cinematic-swipe,
+.testi-layout-wrapper {
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 16 / 9;
+}
+
+.project-gallery {
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 16 / 9;
+}
+
+@media (max-width: 768px) {
+
+  .cinematic-grid-2x2,
+  .cinematic-swipe,
+  .testi-layout-wrapper {
+    aspect-ratio: 3 / 2 !important;
+    /* Slightly taller on mobile */
+  }
+
+  .project-gallery,
+  .project-model {
+    aspect-ratio: 3 / 2 !important;
+  }
+}
+
+/* 2x2 Grid for exactly 4 images */
+.cinematic-grid-2x2 {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  grid-template-rows: repeat(2, 1fr) !important;
+  gap: 4px !important;
+  /* Visually overlap the model without breaking flex layout */
+  width: 105%;
+  height: 100%;
+  position: relative;
+}
+
+.featured-project-card.reverse .cinematic-grid-2x2 {
+  left: -5%;
+  /* Shift left to overlap the model on the left */
+}
+
+.cinematic-grid-2x2 img,
+.cinematic-grid-2x2 .moment-img-wrap,
+.cinematic-grid-2x2 .expertise-img-wrap,
+.cinematic-grid-2x2 .expertise-card,
+.cinematic-grid-2x2 .moment-item {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0 !important;
+  /* Sharp elegant edges */
+  box-shadow: none !important;
+}
+
+/* Horizontal Swipe (DEPRECATED - Converted to static) */
+.cinematic-swipe {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  width: 100% !important;
+  flex: 1 !important;
+  gap: 4px !important;
+}
+
+.testi-layout-wrapper .cinematic-swipe {
+  aspect-ratio: auto !important;
+  height: 100% !important;
+}
+
+.cinematic-swipe-item {
+  width: 100%;
+  height: 100%;
+}
+
+.cinematic-swipe-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+/* Testimonials Layout */
+.testi-layout-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.testi-layout-wrapper .cinematic-swipe {
+  aspect-ratio: auto !important;
+  height: 100% !important;
+}
+
+.testi-grid-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.testi-model-left {
+  flex: 0 0 35%;
+  height: 100%;
+}
+
+.testi-model-left img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gallery-and-model {
+  display: flex !important;
+  flex-direction: row !important;
+  /* Force side-by-side on ALL screens */
+}
+
+.featured-project-card.reverse .gallery-and-model {
+  flex-direction: row-reverse !important;
+  /* Preserve alternating layout */
+}
+
+@media (max-width: 992px) {
+
+  /* Exactly like desktop */
+  .gallery-and-model {
+    aspect-ratio: 16 / 9 !important;
+    width: 100vw !important;
+    margin-left: calc(-50vw + 50%);
+    /* Force full bleed if not already */
+    gap: 0 !important;
+    /* Remove gap completely */
+  }
+}
+
+.gallery-and-model {
+  display: flex !important;
+  flex-direction: row !important;
+  /* Force side-by-side on ALL screens */
+  gap: 0 !important;
+  /* Remove gap */
+}
+
+.project-gallery {
+  width: 65% !important;
+  /* Perfect 65% layout */
+  flex: 0 0 65% !important;
+  margin: 0 !important;
+  /* Remove all margins */
+  min-width: 0;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  position: relative;
+  /* For inner overlapping */
+}
+
+.featured-project-card.reverse .project-gallery {
+  margin: 0 !important;
+}
+
+/* Override passepartout if it exists */
+.gallery-passepartout {
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+}
+
+.project-model {
+  width: 35% !important;
+  flex: 0 0 35% !important;
+  min-width: 0;
+  z-index: 10 !important;
+  /* Model has highest index */
+  position: relative !important;
+  margin: 0 !important;
+  /* Keep model exactly in its flex space */
+  transform: none !important;
+  /* Do not scale, to prevent any pushing */
+  box-shadow: -8px 0 20px rgba(0, 0, 0, 0.4);
+  /* Stronger shadow */
+}
+
+.featured-project-card.reverse .project-model {
+  margin: 0 !important;
+  box-shadow: 8px 0 20px rgba(0, 0, 0, 0.4);
+}
+
+.project-model img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: top center !important;
+  max-width: 100% !important;
+  /* Override old styles */
+  border-radius: 0 !important;
+  border: none !important;
+}
+
+/* Desktop-only: Fix model cropping and create massive 3D pop-out */
+@media (min-width: 993px) {
+  .project-model img {
+    /* Use contain to prevent aggressive cropping of the transparent image */
+    object-fit: contain !important;
+    /* Scale up to create the overlap and 3D effect */
+    transform: scale(1.4) !important;
+    /* Normal layout: Model on right, anchor to right so she scales left over the gallery */
+    transform-origin: right bottom !important;
+  }
+
+  .featured-project-card.reverse .project-model img {
+    /* Reverse layout: Model on left, anchor to left so she scales right over the gallery */
+    transform-origin: left bottom !important;
+  }
+}
+
+/* 5-image Bento Grid Exact Match to DANALOG */
+.bento-gallery-5 {
+  display: grid;
+  grid-template-columns: 25% 37.5% 37.5%;
+  grid-template-rows: 60% 40%;
+  gap: 4px;
+  height: 100%;
+  /* Visually overlap the model without breaking flex layout */
+  width: 105%;
+  position: relative;
+}
+
+.featured-project-card.reverse .bento-gallery-5 {
+  left: -5%;
+  /* Shift left to overlap the model on the left */
+}
+
+.bento-item {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box !important;
+  border: 1px solid var(--color-gold-light) !important;
+  animation: lb-sparkle-border 2.5s infinite alternate !important;
+  border-radius: 0 !important;
+}
+
+.bento-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: none !important;
+  border-radius: 0 !important;
+}
+
+/* Project Info Bar */
+.project-info-bar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 2rem;
+  /* Reduced desktop padding */
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  color: var(--color-gold-light, #f1e5ac);
+  /* Remove border and margin to keep it flush */
+  border-bottom: none;
+  margin-bottom: 0 !important;
+}
+
+.info-group {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.info-label {
+  font-size: 0.6rem;
+  letter-spacing: 1px;
+  opacity: 0.7;
+}
+
+.info-value {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .project-info-bar {
+    padding: 0.25rem 1rem;
+    margin-bottom: 0 !important;
+    /* Force no gap */
+  }
+
+  .info-value {
+    font-size: 0.7rem;
+    /* Removed truncation properties so text doesn't show ... */
+  }
+
+  .info-label {
+    font-size: 0.45rem;
+  }
+
+  /* Hide Venue and Audience on mobile to keep it thin and focused */
+  .project-info-bar .info-group:nth-child(3),
+  .project-info-bar .info-group:nth-child(4) {
+    display: none !important;
+  }
+}
+
+.project-gallery-grid {
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-auto-rows: 1fr;
+  /* Make rows equal height automatically */
+  gap: 2px;
+}
+
+.cinematic-grid-item {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  border: 1px solid var(--color-gold-light);
+  animation: lb-sparkle-border 2.5s infinite alternate;
+}
+
+.cinematic-grid-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.projects-container {
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* Overriding font clamps to ensure readability */
+.cinematic-slide .moment-caption,
+.cinematic-slide .exp-title-en,
+.cinematic-slide .exp-title-vi {
+  font-size: clamp(0.85rem, 1.5vw, 1.2rem) !important;
+  padding: 10px !important;
+  letter-spacing: 1px;
+}
+
+
+
+.lookbook-img-wrapper {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(212, 175, 55, 0.5);
+  /* Thin gold border */
+}
+
+/* Fix Full Bleed layout overriding older max-widths */
+.full-bleed {
+  width: 100vw !important;
+  max-width: 100vw !important;
+  margin-left: 50% !important;
+  transform: translateX(-50%) !important;
+  padding: 0 !important;
+}
+
+/* Override Why Work With Me — OLD GRID REMOVED, now using cinematic panels */
+@media (max-width: 768px) {
+
+  /* Make sure video grid is 2 columns if not already */
+  .video-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/* Override Featured Projects for Mobile */
+@media (max-width: 992px) {
+
+  /* Prevent the card from using column-reverse from style.css */
+  .featured-project-card {
+    display: flex !important;
+    flex-direction: column !important;
+    padding: 0 !important;
+    /* Remove ALL padding */
+    margin-bottom: 0 !important;
+    /* Remove ALL margin */
+  }
+}
+
+/* =========================================
+   CLIENT TESTIMONIALS - EDITORIAL POSTER
+   ========================================= */
+
+.testimonial-poster-section {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  /* Tràn viền 100% màn hình */
+  background-color: #A91D1D;
+  /* Màu đỏ đô rực rỡ y hệt ảnh mẫu */
+  overflow: hidden;
+  min-height: 80vh;
+  /* Đảm bảo đủ chiều cao cho ảnh MC đứng */
+}
+
+/* --- NỬA TRÁI: DÀN 4 ẢNH GRID 2x2 --- */
+.poster-left-grid {
+  width: 55%;
+  /* Chiếm 55% màn hình */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  /* 2 cột bằng nhau */
+  grid-template-rows: repeat(2, 1fr);
+  /* 2 hàng bằng nhau */
+  gap: 1vw;
+  /* Khoảng hở tạo thành các đường viền đỏ tự nhiên */
+  padding: 1vw;
+}
+
+.grid-img-wrap {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  /* Nếu thích ảnh vuông vức sắc cạnh như mẫu thì bỏ border-radius đi */
+  /* border-radius: 8px; */
+}
+
+.grid-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Đảm bảo ảnh lấp đầy ô vuông không bị méo */
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.grid-img-wrap img:hover {
+  transform: scale(1.05);
+  /* Zoom nhẹ khi rê chuột */
+}
+
+/* --- NỬA PHẢI: TYPOGRAPHY & MODEL CUTOUT --- */
+.poster-right-hero {
+  width: 45%;
+  /* Chiếm 45% còn lại */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 3vw;
+  /* Thụt vào một chút cho chữ không dính sát viền ảnh */
+}
+
+/* Chữ khổng lồ (Nằm dưới ảnh MC) */
+.giant-poster-text {
+  font-family: 'Impact', 'Oswald', sans-serif;
+  font-size: clamp(4rem, 8vw, 10rem);
+  /* Chữ tự động to nhỏ theo màn hình */
+  line-height: 0.85;
+  /* Ép các dòng chữ dính sát vào nhau */
+  color: #FDF5E6;
+  /* Màu trắng kem sữa sang trọng */
+  text-transform: uppercase;
+  margin: 0;
+  z-index: 1;
+  /* Nằm dưới */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Ảnh MC tách nền (Nằm đè lên chữ) */
+.poster-model {
+  position: absolute;
+  bottom: 0;
+  /* Cho MC đứng bám sát mép dưới section */
+  right: 5%;
+  /* Đứng lệch sang phải một chút */
+  height: 95%;
+  /* Ảnh MC chiếm 95% chiều cao khung hình */
+  z-index: 2;
+  /* Nổi lên trên cùng, đè lên chữ */
+  pointer-events: none;
+  /* Tránh cản trở việc khách copy chữ */
+}
+
+.poster-model img {
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(-15px 10px 25px rgba(0, 0, 0, 0.6));
+  /* Đổ bóng tạo hiệu ứng 3D như người thật đang đứng */
+}
+
+
+/* =========================================
+   MOBILE RESPONSIVE (Xếp chồng)
+   ========================================= */
+@media (max-width: 992px) {
+  .testimonial-poster-section {
+    flex-direction: column;
+    /* Đổi thành cột dọc trên điện thoại */
+  }
+
+  /* Đưa mảng Đỏ, Chữ & Ảnh MC lên trên cùng làm Header */
+  .poster-right-hero {
+    width: 100%;
+    order: 1;
+    /* Ưu tiên xếp lên trên */
+    height: 60vh;
+    /* Chiều cao vừa đủ cho MC đứng */
+    padding: 0 5vw;
+    align-items: center;
+    /* Căn giữa toàn bộ */
+    text-align: center;
+    background-color: #A91D1D;
+  }
+
+  .giant-poster-text {
+    font-size: clamp(4.5rem, 15vw, 7rem);
+    z-index: 1;
+  }
+
+  .poster-model {
+    right: 50%;
+    /* Đưa MC ra chính giữa màn hình */
+    transform: translateX(50%);
+    height: 85%;
+    /* Giảm chiều cao một chút để không che hết chữ */
+  }
+
+  /* Dàn 4 ảnh Feedback xếp gọn gàng ở dưới */
+  .poster-left-grid {
+    width: 100%;
+    order: 2;
+    /* Xếp xuống dưới */
+    padding: 3vw;
+    gap: 3vw;
+    /* Vẫn giữ layout 2x2 siêu gọn trên điện thoại */
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+  }
+}

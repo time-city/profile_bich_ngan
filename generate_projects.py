@@ -73,6 +73,66 @@ event_info_map = {
         "client": "MU Athletes",
         "venue": "Montgomerie Links Golf Club",
         "audience": "150 - 200 Pax"
+    },
+    "Danalog": {
+        "title": "SỰ KIỆN DANALOG",
+        "client": "Danalog",
+        "venue": "Updating...",
+        "audience": "Updating..."
+    },
+    "LUMIA": {
+        "title": "SỰ KIỆN LUMIA",
+        "client": "LUMIA",
+        "venue": "Updating...",
+        "audience": "Updating..."
+    },
+    "viettel": {
+        "title": "SỰ KIỆN VIETTEL",
+        "client": "Viettel",
+        "venue": "Updating...",
+        "audience": "Updating..."
+    },
+    "VNPT": {
+        "title": "SỰ KIỆN VNPT",
+        "client": "VNPT",
+        "venue": "Updating...",
+        "audience": "Updating..."
+    },
+    "wedding": {
+        "title": "TIỆC CƯỚI CAO CẤP",
+        "client": "Wedding",
+        "venue": "Updating...",
+        "audience": "Updating..."
+    },
+    "wedding2": {
+        "title": "TIỆC CƯỚI NGOÀI TRỜI",
+        "client": "Wedding",
+        "venue": "Updating...",
+        "audience": "Updating..."
+    },
+    "wedding3": {
+        "title": "TIỆC CƯỚI BÃI BIỂN",
+        "client": "Wedding",
+        "venue": "Updating...",
+        "audience": "Updating..."
+    },
+    "MATRAX": {
+        "title": "SỰ KIỆN MATRAX",
+        "client": "Matrax",
+        "venue": "Updating...",
+        "audience": "Updating..."
+    },
+    "KJ group": {
+        "title": "SỰ KIỆN KJ GROUP",
+        "client": "KJ Group",
+        "venue": "Updating...",
+        "audience": "Updating..."
+    },
+    "abbott": {
+        "title": "SỰ KIỆN ABBOTT",
+        "client": "Abbott",
+        "venue": "Updating...",
+        "audience": "Updating..."
     }
 }
 
@@ -87,40 +147,30 @@ model_map = {
     "RHB investment": "rhb.webp",
     "TCL": "TCL.webp",
     "TẤN HƯN - Hội nghị khách hàng": "tấn hưng.webp",
-    "golf_MU_athletes": "golf.webp"
+    "golf_MU_athletes": "golf.webp",
+    "Danalog": "DANAlog.webp",
+    "LUMIA": "LUMIA.webp",
+    "viettel": "viettel.webp",
+    "VNPT": "VNPT.webp",
+    "wedding": "wedding.webp",
+    "wedding2": "wedding1.webp",
+    "wedding3": "wedding2.webp",
+    "MATRAX": "matrax.webp",
+    "KJ group": "KJgroup.webp",
+    "abbott": "abbott.webp"
 }
 
-template_7 = """<div class="featured-project-card {reverse_class}">
-  <div class="decor-text decor-top-left">✦ English Hosting</div>
-  <div class="decor-text decor-top-right">VIP Reception ✦</div>
-  <div class="decor-text decor-bottom-left">✦ Interactive Session</div>
-  <div class="decor-text decor-bottom-right">Award Ceremony ✦</div>
-
-  <div class="project-info">
-    <h4 class="project-title">{title}</h4>
-    <div class="project-details">
-      <div class="detail-item">
-        <span class="detail-label">Role | Vai trò</span>
-        <span class="detail-value">Master of Ceremonies</span>
-      </div>
-      <div class="detail-item">
-        <span class="detail-label">Client | Khách hàng</span>
-        <span class="detail-value">{client}</span>
-      </div>
-      <div class="detail-item">
-        <span class="detail-label">Venue | Địa điểm</span>
-        <span class="detail-value">{venue}</span>
-      </div>
-      <div class="detail-item">
-        <span class="detail-label">Audience | Quy mô</span>
-        <span class="detail-value">{audience}</span>
-      </div>
-    </div>
+template_7 = """<div class="featured-project-card {reverse_class} cinematic-slide">
+  <div class="project-info-bar">
+    <div class="info-group"><span class="info-value">{title}</span></div>
+    <div class="info-group"><span class="info-value">{client}</span></div>
+    <div class="info-group"><span class="info-value">{venue}</span></div>
+    <div class="info-group"><span class="info-value">{audience}</span></div>
   </div>
 
   <div class="gallery-and-model">
     <div class="project-gallery gallery-passepartout">
-      <div class="project-gallery-grid">
+      <div class="bento-gallery-5">
 {images_html}
       </div>
     </div>
@@ -132,28 +182,29 @@ template_7 = """<div class="featured-project-card {reverse_class}">
 
 def generate_html_images(images, count):
     html = ""
-    if count >= 7:
-        html += f'        <div class="gallery-item"><img src="{images[0]}" alt="Event" class="gallery-img"></div>\n'
-        html += f'        <div class="gallery-item"><img src="{images[1]}" alt="Event" class="gallery-img"></div>\n'
-        html += f'        <div class="gallery-item"><img src="{images[2]}" alt="Event" class="gallery-img"></div>\n'
-        html += f'        <div class="gallery-item"><img src="{images[3]}" alt="Event" class="gallery-img"></div>\n'
-        html += f'        <div class="gallery-item"><img src="{images[4]}" alt="Event" class="gallery-img"></div>\n'
-        html += f'        <div class="gallery-item"><img src="{images[5]}" alt="Event" class="gallery-img"></div>\n'
-        html += f'        <div class="gallery-item"><img src="{images[6]}" alt="Event" class="gallery-img"></div>\n'
-    elif count == 6:
-        html += f'        <div class="gallery-item" style="grid-column: span 3; aspect-ratio: 4/3;"><img src="{images[0]}" alt="Event" class="gallery-img"></div>\n'
-        html += f'        <div class="gallery-item" style="grid-column: span 3; aspect-ratio: 4/3;"><img src="{images[1]}" alt="Event" class="gallery-img"></div>\n'
-        html += f'        <div class="gallery-item" style="grid-column: span 2; aspect-ratio: 1;"><img src="{images[2]}" alt="Event" class="gallery-img"></div>\n'
-        html += f'        <div class="gallery-item" style="grid-column: span 2; aspect-ratio: 1;"><img src="{images[3]}" alt="Event" class="gallery-img"></div>\n'
-        html += f'        <div class="gallery-item" style="grid-column: span 2; aspect-ratio: 1;"><img src="{images[4]}" alt="Event" class="gallery-img"></div>\n'
-        html += f'        <div class="gallery-item" style="grid-column: span 6; aspect-ratio: 21/9;"><img src="{images[5]}" alt="Event" class="gallery-img"></div>\n'
-    elif count >= 3:
-        html += f'        <div class="gallery-item" style="grid-column: span 6; aspect-ratio: 21/9;"><img src="{images[0]}" alt="Event" class="gallery-img"></div>\n'
-        html += f'        <div class="gallery-item" style="grid-column: span 3; aspect-ratio: 4/3;"><img src="{images[1]}" alt="Event" class="gallery-img"></div>\n'
-        html += f'        <div class="gallery-item" style="grid-column: span 3; aspect-ratio: 4/3;"><img src="{images[2]}" alt="Event" class="gallery-img"></div>\n'
-    else:
-        for img in images:
-            html += f'        <div class="gallery-item" style="grid-column: span 6;"><img src="{img}" alt="Event" class="gallery-img"></div>\n'
+    max_img = min(count, 5) # Limit to max 5 gallery images
+    
+    if max_img == 5:
+        # 5 images Bento Grid exact match to DANALOG
+        html += f'        <div class="gallery-item bento-item" style="grid-column: 1; grid-row: 1;"><img src="{images[0]}" alt="Event" class="gallery-img"></div>\n'
+        html += f'        <div class="gallery-item bento-item" style="grid-column: 1; grid-row: 2;"><img src="{images[1]}" alt="Event" class="gallery-img"></div>\n'
+        html += f'        <div class="gallery-item bento-item" style="grid-column: 2; grid-row: 1;"><img src="{images[2]}" alt="Event" class="gallery-img"></div>\n'
+        html += f'        <div class="gallery-item bento-item" style="grid-column: 3; grid-row: 1;"><img src="{images[3]}" alt="Event" class="gallery-img"></div>\n'
+        html += f'        <div class="gallery-item bento-item" style="grid-column: 2 / span 2; grid-row: 2;"><img src="{images[4]}" alt="Event" class="gallery-img"></div>\n'
+    elif max_img == 4:
+        html += f'        <div class="gallery-item bento-item" style="grid-column: 1; grid-row: 1 / span 2;"><img src="{images[0]}" alt="Event" class="gallery-img"></div>\n'
+        html += f'        <div class="gallery-item bento-item" style="grid-column: 2; grid-row: 1 / span 2;"><img src="{images[1]}" alt="Event" class="gallery-img"></div>\n'
+        html += f'        <div class="gallery-item bento-item" style="grid-column: 3; grid-row: 1;"><img src="{images[2]}" alt="Event" class="gallery-img"></div>\n'
+        html += f'        <div class="gallery-item bento-item" style="grid-column: 3; grid-row: 2;"><img src="{images[3]}" alt="Event" class="gallery-img"></div>\n'
+    elif max_img == 3:
+        html += f'        <div class="gallery-item bento-item" style="grid-column: 1 / span 2; grid-row: 1 / span 2;"><img src="{images[0]}" alt="Event" class="gallery-img"></div>\n'
+        html += f'        <div class="gallery-item bento-item" style="grid-column: 3; grid-row: 1;"><img src="{images[1]}" alt="Event" class="gallery-img"></div>\n'
+        html += f'        <div class="gallery-item bento-item" style="grid-column: 3; grid-row: 2;"><img src="{images[2]}" alt="Event" class="gallery-img"></div>\n'
+    elif max_img == 2:
+        html += f'        <div class="gallery-item bento-item" style="grid-column: 1 / span 2; grid-row: 1 / span 2;"><img src="{images[0]}" alt="Event" class="gallery-img"></div>\n'
+        html += f'        <div class="gallery-item bento-item" style="grid-column: 3; grid-row: 1 / span 2;"><img src="{images[1]}" alt="Event" class="gallery-img"></div>\n'
+    elif max_img == 1:
+        html += f'        <div class="gallery-item bento-item" style="grid-column: 1 / span 3; grid-row: 1 / span 2;"><img src="{images[0]}" alt="Event" class="gallery-img"></div>\n'
     return html
 
 os.makedirs(projects_dir, exist_ok=True)
@@ -162,9 +213,15 @@ for old_f in glob.glob(os.path.join(projects_dir, "project-*.html")):
 
 folders = sorted([f for f in os.listdir(event_dir) if os.path.isdir(os.path.join(event_dir, f))])
 
+if "KJ group" in folders:
+    folders.remove("KJ group")
+    folders.insert(0, "KJ group")
+
 generated_files = []
 
 for i, folder in enumerate(folders):
+    filename = f"project-{i+1:02d}.html"
+
     folder_path = os.path.join(event_dir, folder)
     images = [f for f in os.listdir(folder_path) if f.lower().endswith(('.jpg', '.jpeg', '.png', '.webp', '.gif'))]
     images.sort()
@@ -191,7 +248,6 @@ for i, folder in enumerate(folders):
         images_html=images_html, model_image=model_img, reverse_class=reverse_class
     ))
     
-    filename = f"project-{i+1:02d}.html"
     out_file = os.path.join(projects_dir, filename)
     with open(out_file, 'w', encoding='utf-8') as f:
         f.write(html_content)

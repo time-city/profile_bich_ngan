@@ -28,6 +28,39 @@
 
   console.log(`Fade observer attached to ${sections.length} sections.`);
 
+  // --- Autoplay Videos on Scroll & Prevent Black Screen ---
+  const videoElements = document.querySelectorAll('video');
+  if (videoElements.length > 0) {
+    const videoObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.play().catch(e => console.log("Autoplay prevented by browser:", e));
+        } else {
+          entry.target.pause();
+        }
+      });
+    }, { threshold: 0.2 });
+
+    videoElements.forEach(video => {
+      video.muted = true;
+      video.playsInline = true;
+      
+      // Mẹo chống đen màn hình trên mobile khi chưa play:
+      // Ép video nhảy tới 0.1s để load frame đầu tiên
+      if (video.readyState >= 1) {
+        video.currentTime = 0.1;
+      } else {
+        video.addEventListener('loadedmetadata', function() {
+          this.currentTime = 0.1;
+        }, { once: true });
+      }
+
+      videoObserver.observe(video);
+    });
+    
+    console.log(`Video observer attached to ${videoElements.length} videos.`);
+  }
+
   // --- Hiệu ứng đếm số (Count-up Animation) ---
   const counters = document.querySelectorAll('.count-up');
   
@@ -77,7 +110,7 @@
   }
 
   // --- Random Auto Hover Effect cho ảnh (Education & Why Me) ---
-  const galleryImages = document.querySelectorAll('.bg-education img, .bg-why-me img');
+  const galleryImages = document.querySelectorAll('.bg-why-me img');
   if (galleryImages.length > 0) {
     setInterval(() => {
       // Xóa class phát sáng ở tất cả các ảnh (để tránh lỗi dồn dập)
@@ -205,6 +238,70 @@ window.filterMoments = function(category) {
     } else {
       attempts++;
       if (attempts > 20) clearInterval(checkInterval);
+    }
+  }, 500);
+})();
+
+// --- Auto-play Videos on Scroll & Single Play Logic ---
+(function initVideoLogic() {
+  let attempts = 0;
+  const checkInterval = setInterval(() => {
+    const videos = Array.from(document.querySelectorAll('video'));
+    if (videos.length > 0) {
+      clearInterval(checkInterval);
+
+      // Track which videos are visible to prevent race conditions on mobile
+      const visibleVideos = new Set();
+
+      const videoObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          const video = entry.target;
+          if (entry.isIntersecting) {
+            visibleVideos.add(video);
+          } else {
+            visibleVideos.delete(video);
+            video.pause();
+          }
+        });
+
+        // Determine if we need to auto-play a video
+        let hasPlaying = false;
+        videos.forEach(v => {
+          if (visibleVideos.has(v) && !v.paused) hasPlaying = true;
+        });
+
+        // Only auto-play the FIRST visible video if none are playing
+        if (!hasPlaying && visibleVideos.size > 0) {
+          for (let video of videos) {
+            if (visibleVideos.has(video)) {
+              video.muted = true;
+              video.play().catch(e => console.log('Autoplay blocked by browser:', e));
+              break; // Stop after playing one
+            }
+          }
+        }
+      }, { threshold: 0.1 }); // Kích hoạt ngay khi video lộ ra 10%
+
+      videos.forEach(video => {
+        // Đảm bảo các thuộc tính bắt buộc cho mobile
+        video.setAttribute('playsinline', '');
+        video.setAttribute('muted', '');
+        videoObserver.observe(video);
+
+        // Chỉ cho phép 1 video play cùng lúc khi click thủ công
+        video.addEventListener('play', () => {
+          videos.forEach(v => {
+            if (v !== video && !v.paused) {
+              v.pause();
+            }
+          });
+        });
+      });
+
+      console.log('Video auto-play and single-play logic initialized.');
+    } else {
+      attempts++;
+      if (attempts > 40) clearInterval(checkInterval);
     }
   }, 500);
 })();
