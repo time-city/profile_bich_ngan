@@ -237,10 +237,15 @@ document.addEventListener('click', function(e) {
 document.addEventListener('click', function(e) {
   if (e.target.tagName === 'VIDEO') {
     const video = e.target;
-    if (video.paused) {
-      video.play();
+    if (video.muted) {
+      video.muted = false;
+      if (video.paused) video.play();
     } else {
-      video.pause();
+      if (video.paused) {
+        video.play();
+      } else {
+        video.pause();
+      }
     }
   }
 });
@@ -302,7 +307,7 @@ document.addEventListener('click', function(e) {
       
       // Load video on click if not already loaded by observer. Remove muted to allow sound when explicitly clicked.
       const posterSrc = thumbContainer.getAttribute('data-poster') || '';
-      const videoHTML = `<video src=\"${src}\" poster=\"${posterSrc}\" autoplay controls playsinline style=\"width:100%; height:100%; object-fit:cover; border-radius:8px; background:#000;\"></video>`;
+      const videoHTML = `<video src=\"${src}\" poster=\"${posterSrc}\" autoplay playsinline style=\"width:100%; height:100%; object-fit:cover; border-radius:8px; background:#000;\"></video>`;
       thumbContainer.innerHTML = videoHTML;
       video = thumbContainer.querySelector('video');
     } else {
@@ -335,7 +340,7 @@ if ('IntersectionObserver' in window) {
           if (src) {
             // Must be muted for mobile autoplay
             const posterSrc = thumbContainer.getAttribute('data-poster') || '';
-            const videoHTML = `<video src=\"${src}\" poster=\"${posterSrc}\" autoplay controls playsinline loop style=\"width:100%; height:100%; object-fit:cover; border-radius:8px; background:#000;\"></video>`;
+            const videoHTML = `<video src=\"${src}\" poster=\"${posterSrc}\" autoplay playsinline loop style=\"width:100%; height:100%; object-fit:cover; border-radius:8px; background:#000;\"></video>`;
             thumbContainer.innerHTML = videoHTML;
             video = thumbContainer.querySelector('video');
           }
