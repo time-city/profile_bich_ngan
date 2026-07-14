@@ -90,7 +90,7 @@ def get_images(folder_path, count=5):
     # If we have less than count, duplicate some to fill the grid (bento needs 5 slots)
     res = []
     if not images:
-        res = ["./asset/event/placeholder.jpg"] * count
+        res = ["./asset/event/placeholder.webp"] * count
     else:
         for i in range(count):
             res.append(images[i % len(images)])
@@ -116,35 +116,35 @@ feature_files_lower = [f.lower() for f in feature_files if os.path.isfile(os.pat
 def find_feature_model(title, folder):
     # Hardcoded mapping to fix the misses
     mapping = {
-        "DA NANG PORT": "DANANGPORT.png",
-        "Bất Động Sản - mở bán New Town Diamond": "bds_diamond.png",
-        "Mở bán BĐS - Huế Heritage": "BDS_huế.png",
-        "Chợ Lăng cô": "lang_co.png",
+        "DA NANG PORT": "DANANGPORT.webp",
+        "Bất Động Sản - mở bán New Town Diamond": "bds_diamond.webp",
+        "Mở bán BĐS - Huế Heritage": "BDS_huế.webp",
+        "Chợ Lăng cô": "lang_co.webp",
         "GALA_farm": "GALA_farrm.webp",
         "KJ group": "KJgroup.webp",
-        "5 Years anniversary of ESCO BEACH ĐÀ NẴNG": "esco_beach_danang.png",
-        "gala saigon tour": "gala_saigon_tour.png",
-        "Yep của Lg electonic Viet Nam": "lg_electronic.png",
-        "Hội Nghị Phẫu Thuật Thần Kinh Quốc tế lần thứ 9": "thần kinh.png",
-        "Mở bán 17": "mở bán 17.png",
-        "Nữ Hoàng Trang Sức": "nữ hoàng trang sức.png",
-        "Show đoàn khách Malaysia": "malaysia.png",
-        "rhs": "RHS.png",
-        "Good food": "goodfood.png",
-        "monin": "monin.png",
-        "Sự kiện ra mắt sản phẩm mới của Philips": "sự kiện ra mắt sản phẩm philips.png",
-        "Song ngữ Anh Việt - FLG Viet Nam": "song ngữ anh việt.png",
-        "SHB": "SHB.png",
+        "5 Years anniversary of ESCO BEACH ĐÀ NẴNG": "esco_beach_danang.webp",
+        "gala saigon tour": "gala_saigon_tour.webp",
+        "Yep của Lg electonic Viet Nam": "lg_electronic.webp",
+        "Hội Nghị Phẫu Thuật Thần Kinh Quốc tế lần thứ 9": "thần kinh.webp",
+        "Mở bán 17": "mở bán 17.webp",
+        "Nữ Hoàng Trang Sức": "nữ hoàng trang sức.webp",
+        "Show đoàn khách Malaysia": "malaysia.webp",
+        "rhs": "RHS.webp",
+        "Good food": "goodfood.webp",
+        "monin": "monin.webp",
+        "Sự kiện ra mắt sản phẩm mới của Philips": "sự kiện ra mắt sản phẩm philips.webp",
+        "Song ngữ Anh Việt - FLG Viet Nam": "song ngữ anh việt.webp",
+        "SHB": "SHB.webp",
         "golf_MU_athletes": "golf.webp",
-        "giải golf họ Phan toàn quốc": "golf họ phan toàn quốc.png",
-        "golf clb": "golf clb.png",
-        "Dseza": "Desza.png",
+        "giải golf họ Phan toàn quốc": "golf họ phan toàn quốc.webp",
+        "golf clb": "golf clb.webp",
+        "Dseza": "Desza.webp",
         "viettel": "viettel.webp",
         "Danalog": "DANAlog.webp",
-        "Sabeco": "sabeco.png",
+        "Sabeco": "sabeco.webp",
         "abbott": "abbott.webp",
         "Menarini - kỷ niệm 15 năm thành lập - Color Event - Viettravel": "Menarini.webp",
-        "Panasonic": "panasonic.png",
+        "Panasonic": "panasonic.webp",
         "Hội Nghị Khách Hàng TCL": "TCL.webp",
         "AEON VIET NAM": "AEON.webp",
         "MATRAX": "matrax.webp",
@@ -153,7 +153,7 @@ def find_feature_model(title, folder):
     }
     if folder in mapping:
         return mapping[folder]
-    return "profile.png" # Safe fallback
+    return "profile.webp" # Safe fallback
 
 html_template = """<div class="featured-project-card cinematic-slide {reverse_class}">
   <div class="project-info-bar">
@@ -189,7 +189,7 @@ for idx, line in enumerate(lines):
         title = "Hội Nghị Phẫu Thuật Thần Kinh Việt Nam"
         
     matched_dir = find_folder(folder)
-    images = get_images(matched_dir, 5) if matched_dir else ["./asset/event/placeholder.jpg"] * 5
+    images = get_images(matched_dir, 5) if matched_dir else ["./asset/event/placeholder.webp"] * 5
     
     model_src = find_feature_model(title, folder)
     

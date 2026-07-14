@@ -24,7 +24,7 @@ for html_file in html_files:
         
         # Determine thumbnail path
         clean_video_src = video_src[2:] if video_src.startswith("./") else video_src
-        thumb_name = os.path.splitext(os.path.basename(clean_video_src))[0] + ".jpg"
+        thumb_name = os.path.splitext(os.path.basename(clean_video_src))[0] + ".webp"
         thumb_path = os.path.join(base_dir, "asset", "thumbnails", thumb_name)
         
         if os.path.exists(thumb_path):

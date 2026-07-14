@@ -29,7 +29,7 @@ for html_file in html_files:
         real_video_path = os.path.join(base_dir, clean_video_src)
         
         if os.path.exists(real_video_path):
-            thumb_name = os.path.splitext(os.path.basename(clean_video_src))[0] + ".jpg"
+            thumb_name = os.path.splitext(os.path.basename(clean_video_src))[0] + ".webp"
             thumb_dir = os.path.join(base_dir, "asset", "thumbnails")
             os.makedirs(thumb_dir, exist_ok=True)
             real_thumb_path = os.path.join(thumb_dir, thumb_name)

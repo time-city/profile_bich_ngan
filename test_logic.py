@@ -2,11 +2,11 @@ import os
 def find_feature_model(title, folder):
     mapping = {
         "Menarini - kỷ niệm thành lập - ảnh và clip": "Menarini.webp",
-        "PANASONIC ảnh - clip": "panasonic.png",
+        "PANASONIC ảnh - clip": "panasonic.webp",
         "TCL": "TCL.webp",
     }
     if folder in mapping: return mapping[folder]
-    return "profile.png"
+    return "profile.webp"
 
 asset_dir = "/Users/admin/Documents/profile_bich_ngan/asset/event"
 all_dirs = []

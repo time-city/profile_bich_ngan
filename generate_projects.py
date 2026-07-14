@@ -117,7 +117,7 @@ for idx, line in enumerate(lines):
             img_src = rel_path
             
     if not img_src:
-        img_src = "./asset/event/placeholder.jpg"
+        img_src = "./asset/event/placeholder.webp"
         
     file_name = f"project-{idx+1:02d}.html"
     file_path = os.path.join(components_dir, file_name)
