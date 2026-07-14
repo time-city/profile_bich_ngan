@@ -2,6 +2,11 @@
    CINEMATIC & LUXURY MINIMALIST FRAMEWORK
    ======================================= */
 
+.text-center {
+  text-align: center !important;
+}
+
+
 /* Force landscape ratio on all devices */
 .cinematic-slide {
   width: 100vw !important;
@@ -223,29 +228,31 @@
   width: 100% !important;
   height: 100% !important;
   object-fit: cover !important;
-  object-position: top center !important;
+  object-position: bottom center !important;
   max-width: 100% !important;
   /* Override old styles */
   border-radius: 0 !important;
   border: none !important;
 }
 
-/* Desktop-only: Fix model cropping and create massive 3D pop-out */
+.project-model img {
+  object-fit: contain !important;
+  object-position: bottom left !important;
+  transform: scale(1.15) !important;
+  transform-origin: left bottom !important;
+}
+
+.featured-project-card.reverse .project-model img {
+  object-position: bottom right !important;
+  transform-origin: right bottom !important;
+}
+
 @media (min-width: 993px) {
   .project-model img {
-    /* Use contain to prevent aggressive cropping of the transparent image */
-    object-fit: contain !important;
-    /* Scale up to create the overlap and 3D effect */
     transform: scale(1.4) !important;
-    /* Normal layout: Model on right, anchor to right so she scales left over the gallery */
-    transform-origin: right bottom !important;
-  }
-
-  .featured-project-card.reverse .project-model img {
-    /* Reverse layout: Model on left, anchor to left so she scales right over the gallery */
-    transform-origin: left bottom !important;
   }
 }
+
 
 /* 5-image Bento Grid Exact Match to DANALOG */
 .bento-gallery-5 {
@@ -262,6 +269,30 @@
 .featured-project-card.reverse .bento-gallery-5 {
   left: -5%;
   /* Shift left to overlap the model on the left */
+}
+
+/* 6-image Bento Grid for Styles */
+.bento-gallery-6 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 60% 40%;
+  gap: 4px;
+  height: 100%;
+  width: 105%;
+  position: relative;
+}
+
+.featured-project-card.reverse .bento-gallery-6 {
+  left: -5%;
+}
+
+.bento-gallery-6 .bento-item:nth-child(1),
+.bento-gallery-6 .bento-item:nth-child(2) {
+  grid-column: span 2;
+}
+
+.bento-gallery-6 .bento-item:nth-child(n+3) {
+  grid-column: span 1;
 }
 
 .bento-item {
@@ -330,9 +361,8 @@
     font-size: 0.45rem;
   }
 
-  /* Hide Venue and Audience on mobile to keep it thin and focused */
-  .project-info-bar .info-group:nth-child(3),
-  .project-info-bar .info-group:nth-child(4) {
+  /* Hide everything except the title on mobile to keep it thin and focused */
+  .project-info-bar .info-group:not(:first-child) {
     display: none !important;
   }
 }
@@ -568,5 +598,367 @@
     /* Vẫn giữ layout 2x2 siêu gọn trên điện thoại */
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
+  }
+}
+
+/* =======================================
+   NEW STYLE GALLERY (Vertical Title + 3x2 Grid)
+   ======================================= */
+.style-gallery-container {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  width: 105%;
+  height: 100%;
+  position: relative;
+  gap: 15px;
+}
+
+.featured-project-card.reverse .style-gallery-container {
+  left: -5%;
+  flex-direction: row-reverse;
+}
+
+.style-gallery-vertical-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  padding: 10px 0;
+}
+
+.vertical-title {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: 'Caveat', cursive, sans-serif;
+  font-size: clamp(1.5rem, 3.5vw, 3rem);
+  color: var(--color-gold-metallic);
+  white-space: nowrap;
+  margin: 0;
+  text-transform: uppercase;
+  text-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+  letter-spacing: 2px;
+}
+
+.grid-3x2-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 4px;
+  flex: 1;
+  height: 100%;
+}
+
+.grid-3x2-gallery .bento-item {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box !important;
+  border: 1px solid var(--color-gold-light) !important;
+  animation: lb-sparkle-border 2.5s infinite alternate !important;
+  border-radius: 0 !important;
+}
+
+.grid-3x2-gallery .bento-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: none !important;
+  border-radius: 0 !important;
+}
+
+@media (max-width: 768px) {
+  .style-gallery-container {
+    gap: 5px;
+  }
+
+  .vertical-title {
+    font-size: clamp(1rem, 3.5vw, 1.5rem);
+  }
+}
+
+/* --- BENTO MOSAIC 12 (Work Experience) --- */
+.bento-mosaic-12 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 250px;
+  gap: 15px;
+  width: 100%;
+  grid-auto-flow: dense;
+}
+
+.mosaic-item {
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--color-gold-muted, #b38b4d);
+  padding: 6px;
+}
+
+.mosaic-item img {
+  border-radius: 2px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.item-large {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.item-tall {
+  grid-row: span 2;
+}
+
+.item-wide {
+  grid-column: span 2;
+}
+
+@media (max-width: 992px) {
+  .bento-mosaic-12 {
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .bento-mosaic-12 {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 150px;
+    gap: 10px;
+  }
+
+  .item-large {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+
+  .item-wide {
+    grid-column: span 2;
+  }
+
+  .item-tall {
+    grid-row: span 2;
+  }
+}
+
+/* ========== ARTIST COLLABORATION GRID (Section 13) ========== */
+.artist-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 20px;
+  width: 100%;
+}
+
+/* Default card: 2 col span (for 3-column rows in a 6-col grid) */
+.artist-card {
+  grid-column: span 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Wide card: 3 col span (for 2-column rows in a 6-col grid) */
+.artist-card--wide {
+  grid-column: span 3;
+}
+
+.artist-frame {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid #b38b4d;
+  padding: 6px;
+  background: rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.artist-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 3px;
+  display: block;
+}
+
+.artist-name {
+  margin-top: 0.8rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.75);
+  letter-spacing: 0.5px;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.artist-name strong {
+  display: block;
+  font-size: 0.85rem;
+  color: #c9a96e;
+  font-weight: 600;
+  margin-top: 2px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+@media (max-width: 768px) {
+  .artist-grid {
+    gap: 4px;
+  }
+
+  .artist-name {
+    font-size: 0.5rem;
+    margin-top: 0.4rem;
+    letter-spacing: 0;
+  }
+
+  .artist-name strong {
+    font-size: 0.55rem;
+    letter-spacing: 0;
+  }
+
+  .artist-frame {
+    padding: 3px;
+  }
+}
+
+/* ========== VIDEO GALLERIES (Sections 14-32) ========== */
+.video-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  margin-top: 2rem;
+}
+
+.video-gallery-grid.grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.video-item {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.vid-thumbnail {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  background: #111;
+  border: 1px solid var(--color-gold-muted, #b38b4d);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease;
+}
+
+.vid-thumbnail.vid-vertical {
+  aspect-ratio: 9 / 16;
+}
+
+.vid-thumbnail:hover {
+  transform: scale(1.02);
+}
+
+.vid-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.vid-thumbnail:hover img {
+  opacity: 0.9;
+}
+
+.vid-thumbnail-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 60px;
+  background: rgba(212, 175, 55, 0.8);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+.vid-thumbnail:hover .vid-thumbnail-btn {
+  background: rgba(212, 175, 55, 1);
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+.vid-thumbnail-btn::after {
+  content: '';
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 10px 0 10px 16px;
+  border-color: transparent transparent transparent #fff;
+  margin-left: 4px;
+}
+
+.video-info {
+  text-align: center;
+}
+
+.video-info h4 {
+  font-family: 'Playfair Display', serif;
+  color: var(--color-gold-light, #f1e2c3);
+  font-size: 0.85rem;
+  margin-bottom: 3px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.video-info p {
+  font-family: 'Montserrat', sans-serif;
+  color: #aaa;
+  font-size: 0.7rem;
+  line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  .video-info h4 {
+    font-size: 0.65rem;
+    letter-spacing: 0;
+  }
+
+  .video-info p {
+    font-size: 0.55rem;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .video-gallery-grid,
+  .video-gallery-grid.grid-3 {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 15px;
+    padding-bottom: 20px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .video-gallery-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .video-item {
+    flex: 0 0 85%;
+    scroll-snap-align: center;
   }
 }

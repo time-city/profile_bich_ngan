@@ -1,39 +1,214 @@
-<!-- =========================================
-  CLIENT TESTIMONIALS - PREMIUM SWIPE REELS
-  ========================================= -->
+<style>
+  .feedback-vid-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    padding: 2rem 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .feedback-vid-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+    position: relative;
+  }
+  .feedback-vid-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(212, 175, 55, 0.6);
+  }
+  
+  .vid-wrapper {
+    position: relative;
+    overflow: hidden;
+    background: #000;
+  }
+  .vid-wrapper video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* --- CUSTOM CONTROLS --- */
+  .play-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.6);
+    border: 2px solid var(--color-gold-light, #d4af37);
+    color: var(--color-gold-light, #d4af37);
+    border-radius: 50%;
+    width: 60px; height: 60px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    backdrop-filter: blur(4px);
+    transition: all 0.3s ease;
+    z-index: 10;
+  }
+  .play-overlay:hover {
+    background: var(--color-gold-light, #d4af37);
+    color: #000;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+  .play-overlay svg {
+    width: 30px; height: 30px; fill: currentColor;
+    margin-left: 5px; /* visually center play icon */
+  }
+  .vid-wrapper.playing .play-overlay {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* --- LANDSCAPE (16:9) --- */
+  .feedback-vid-card.landscape {
+    flex-direction: column;
+  }
+  .feedback-vid-card.landscape .vid-wrapper {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+  }
+  .feedback-vid-card.landscape .feedback-vid-caption {
+    padding: 1rem;
+    font-size: 0.95rem;
+    color: var(--color-gold-light, #d4af37);
+    text-align: center;
+    background: #111;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.4;
+  }
+
+  /* --- PORTRAIT (9:16) --- */
+  .feedback-vid-card.portrait {
+    flex-direction: row; 
+    align-items: center;
+    background: #0a0a0a;
+  }
+  .feedback-vid-card.portrait .vid-wrapper {
+    width: 45%;
+    aspect-ratio: 9 / 16;
+  }
+  .feedback-vid-card.portrait .feedback-vid-caption {
+    width: 55%;
+    padding: 1.5rem;
+    font-size: 0.95rem;
+    color: var(--color-gold-light, #d4af37);
+    text-align: left;
+    line-height: 1.5;
+  }
+
+  /* --- MOBILE RESPONSIVE --- */
+  @media (max-width: 768px) {
+    .feedback-vid-grid {
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 1rem;
+      padding: 1.5rem 1rem;
+      scrollbar-width: none; /* Firefox */
+      -webkit-overflow-scrolling: touch;
+    }
+    .feedback-vid-grid::-webkit-scrollbar {
+      display: none; /* Safari/Chrome */
+    }
+    .feedback-vid-card {
+      flex: 0 0 100%;
+      scroll-snap-align: center;
+    }
+    
+
+    
+    .feedback-vid-card.portrait {
+      flex-direction: column;
+    }
+    .feedback-vid-card.portrait .vid-wrapper {
+      width: 100%;
+      aspect-ratio: 9 / 16;
+    }
+    .feedback-vid-card.portrait .feedback-vid-caption {
+      width: 100%;
+      padding: 1.5rem 1rem; 
+      background: #0a0a0a;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+  }
+</style>
+
 <section class="testimonials-premium-section" style="position: relative; overflow: visible;">
-  <!-- Chữ CLIENT TESTIMONIALS vắt ngang giữa 2 section -->
+  
   <div class="section-header text-center" style="margin-bottom: 0.5rem;">
-    <h2 class="section-title-gold" style="font-size: clamp(2rem, 5vw, 4rem); margin-top:10px; text-align: center;">
-      Client Testimonials
+    <h2 class="section-title-gold" style=" margin-top:10px; text-align: center;">
+      Video Testimonials
     </h2>
     <div class="accent-line center-line" style="margin: 0 auto;"></div>
   </div>
+
   <div class="inner-container" style="padding-top: 0.5rem;">
+    <div class="feedback-vid-grid">
 
-    <!-- 2. Dàn Video (Sẽ thành vuốt ngang trên Mobile) -->
-    <div class="ts-video-grid">
-
-      <!-- Video 1 -->
-      <div class="ts-video-card">
-        <video
-          src="./asset/feedback_vid/CEO của Getz - Steve tặng thưởng lì xì cho Mc sau kết chương trình kỷ niệm thành lập_.mp4"
-          controls preload="metadata" muted playsinline></video>
+      <!-- Video 1 (TẤN HƯNG - Portrait) -->
+      <div class="feedback-vid-card portrait">
+        <div class="vid-wrapper">
+          <video src="./asset/feedback_vid/TẤN HƯNG.mp4" playsinline loop preload="metadata"></video>
+          <div class="play-overlay vid-btn play-pause">
+            <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+        </div>
+        <div class="feedback-vid-caption">
+          Cảm nhận khách hàng sau chương trình Hội Nghị Khách Hàng công ty TẤN HƯNG 700 pax
+        </div>
       </div>
 
-      <!-- Video 2 -->
-      <div class="ts-video-card">
-        <video
-          src="./asset/feedback_vid/Khách hàng cảm ơn sau kết chương trình song ngữ Menarini - 15 năm thành lập.mp4"
-          controls preload="metadata" muted playsinline></video>
+      <!-- Video 2 (YES TRAVEL - Landscape) -->
+      <div class="feedback-vid-card landscape">
+        <div class="vid-wrapper">
+          <video src="./asset/feedback_vid/YES TRAVEL AGENCY _ MALAYSIA.mp4" playsinline loop preload="metadata"></video>
+          <div class="play-overlay vid-btn play-pause">
+            <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+        </div>
+        <div class="feedback-vid-caption">
+          Chương trình Gala dinner cho đoàn 300 pax từ công ty RHS Insurance
+        </div>
+      </div>
+
+      <!-- Video 3 (SINGAPORE - Portrait) -->
+      <div class="feedback-vid-card portrait">
+        <div class="vid-wrapper">
+          <video src="./asset/feedback_vid/TRAVEL AGENCY FROM SINGAPORE.mp4" playsinline loop preload="metadata"></video>
+          <div class="play-overlay vid-btn play-pause">
+            <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+        </div>
+        <div class="feedback-vid-caption">
+          Gala dinner công ty CLIPLAS SINGAPORE - tại FOUR POINT by SHERATON
+        </div>
+      </div>
+
+      <!-- Video 4 (SHILLA - Portrait) -->
+      <div class="feedback-vid-card portrait">
+        <div class="vid-wrapper">
+          <video src="./asset/feedback_vid/SHILLA.mp4" playsinline loop preload="metadata"></video>
+          <div class="play-overlay vid-btn play-pause">
+            <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+        </div>
+        <div class="feedback-vid-caption">
+          Chương trình countdown party 2026 của Shilla Monogram Resort
+        </div>
       </div>
 
     </div>
-
-    <!-- 3. Quote Nghệ thuật -->
-    <!-- <div class="ts-quote-box">
-      <p class="quote-en">"The greatest recognition comes from the satisfaction and trust of my clients."</p>
-    </div> -->
-
   </div>
 </section>

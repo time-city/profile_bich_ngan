@@ -1,37 +1,6 @@
 /* Fade-in removed to improve performance */
 
-  // --- Autoplay Videos on Scroll & Prevent Black Screen ---
-  const videoElements = document.querySelectorAll('video');
-  if (videoElements.length > 0) {
-    const videoObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.play().catch(e => console.log("Autoplay prevented by browser:", e));
-        } else {
-          entry.target.pause();
-        }
-      });
-    }, { threshold: 0.2 });
-
-    videoElements.forEach(video => {
-      video.muted = true;
-      video.playsInline = true;
-      
-      // Mẹo chống đen màn hình trên mobile khi chưa play:
-      // Ép video nhảy tới 0.1s để load frame đầu tiên
-      if (video.readyState >= 1) {
-        video.currentTime = 0.1;
-      } else {
-        video.addEventListener('loadedmetadata', function() {
-          this.currentTime = 0.1;
-        }, { once: true });
-      }
-
-      videoObserver.observe(video);
-    });
-    
-    console.log(`Video observer attached to ${videoElements.length} videos.`);
-  }
+  // --- Legacy Video Autoplay removed to allow Custom Controls ---
 
   // --- Hiệu ứng đếm số (Count-up Animation) ---
   const counters = document.querySelectorAll('.count-up');
@@ -214,66 +183,346 @@ window.filterMoments = function(category) {
   }, 500);
 })();
 
-// --- Auto-play Videos on Scroll & Single Play Logic ---
-(function initVideoLogic() {
-  let attempts = 0;
-  const checkInterval = setInterval(() => {
-    const videos = Array.from(document.querySelectorAll('video'));
-    if (videos.length > 0) {
-      clearInterval(checkInterval);
+// --- Legacy Auto-play Videos on Scroll Logic Removed ---
 
-      // Track which videos are visible to prevent race conditions on mobile
-      const visibleVideos = new Set();
+// --- Custom Video Controls Logic ---
+document.addEventListener('click', function(e) {
+  // Check if click is on or within a custom video button
+  const btn = e.target.closest('.vid-btn');
+  if (!btn) return;
 
-      const videoObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          const video = entry.target;
-          if (entry.isIntersecting) {
-            visibleVideos.add(video);
-          } else {
-            visibleVideos.delete(video);
-            video.pause();
-          }
-        });
+  const wrapper = btn.closest('.vid-wrapper');
+  if (!wrapper) return;
 
-        // Determine if we need to auto-play a video
-        let hasPlaying = false;
-        videos.forEach(v => {
-          if (visibleVideos.has(v) && !v.paused) hasPlaying = true;
-        });
+  const video = wrapper.querySelector('video');
+  if (!video) return;
 
-        // Only auto-play the FIRST visible video if none are playing
-        if (!hasPlaying && visibleVideos.size > 0) {
-          for (let video of videos) {
-            if (visibleVideos.has(video)) {
-              video.muted = true;
-              video.play().catch(e => console.log('Autoplay blocked by browser:', e));
-              break; // Stop after playing one
-            }
+  // Prevent default behavior to avoid scrolling
+  e.preventDefault();
+
+  if (btn.classList.contains('play-pause')) {
+    if (video.paused) {
+      video.play();
+      const iconPlay = btn.querySelector('.icon-play');
+      const iconPause = btn.querySelector('.icon-pause');
+      if (iconPlay) iconPlay.style.display = 'none';
+      if (iconPause) iconPause.style.display = 'block';
+    } else {
+      video.pause();
+      const iconPlay = btn.querySelector('.icon-play');
+      const iconPause = btn.querySelector('.icon-pause');
+      if (iconPlay) iconPlay.style.display = 'block';
+      if (iconPause) iconPause.style.display = 'none';
+    }
+  } 
+  else if (btn.classList.contains('mute')) {
+    video.muted = !video.muted;
+    if (video.muted) {
+      btn.querySelector('.icon-unmute').style.display = 'none';
+      btn.querySelector('.icon-mute').style.display = 'block';
+    } else {
+      btn.querySelector('.icon-unmute').style.display = 'block';
+      btn.querySelector('.icon-mute').style.display = 'none';
+    }
+  }
+  else if (btn.classList.contains('seek') && btn.classList.contains('backward')) {
+    video.currentTime = Math.max(0, video.currentTime - 5);
+  }
+  else if (btn.classList.contains('seek') && btn.classList.contains('forward')) {
+    video.currentTime = Math.min(video.duration, video.currentTime + 5);
+  }
+});
+
+// Allow clicking the video itself to play/pause
+document.addEventListener('click', function(e) {
+  if (e.target.tagName === 'VIDEO') {
+    const video = e.target;
+    if (video.paused) {
+      video.play();
+    } else {
+      video.pause();
+    }
+  }
+});
+
+// Sync Play/Pause icons and enforce single-play (pause others) when a video starts playing
+document.addEventListener('play', function(e) {
+  if (e.target.tagName === 'VIDEO') {
+    const currentVideo = e.target;
+    
+    // Pause all other videos
+    document.querySelectorAll('video').forEach(v => {
+      if (v !== currentVideo && !v.paused) {
+        v.pause();
+      }
+    });
+
+    const wrapper = currentVideo.closest('.vid-wrapper');
+    if (wrapper) {
+      wrapper.classList.add('playing');
+      const btn = wrapper.querySelector('.play-pause');
+      if (btn) {
+        const iconPlay = btn.querySelector('.icon-play');
+        const iconPause = btn.querySelector('.icon-pause');
+        if (iconPlay) iconPlay.style.display = 'none';
+        if (iconPause) iconPause.style.display = 'block';
+      }
+    }
+  }
+}, true);
+
+document.addEventListener('pause', function(e) {
+  if (e.target.tagName === 'VIDEO') {
+    const wrapper = e.target.closest('.vid-wrapper');
+    if (wrapper) {
+      wrapper.classList.remove('playing');
+      const btn = wrapper.querySelector('.play-pause');
+      if (btn) {
+        const iconPlay = btn.querySelector('.icon-play');
+        const iconPause = btn.querySelector('.icon-pause');
+        if (iconPlay) iconPlay.style.display = 'block';
+        if (iconPause) iconPause.style.display = 'none';
+      }
+    }
+  }
+}, true);
+
+// Lazy Load Videos via Thumbnail Click or IntersectionObserver
+document.addEventListener('click', function(e) {
+  const btn = e.target.closest('.vid-thumbnail-btn');
+  if(btn || e.target.closest('.vid-thumbnail')) {
+    const thumbContainer = e.target.closest('.vid-thumbnail');
+    if (!thumbContainer) return;
+    
+    let video = thumbContainer.querySelector('video');
+    
+    if (!video) {
+      const src = thumbContainer.getAttribute('data-video-src');
+      if(!src) return;
+      
+      // Load video on click if not already loaded by observer. Remove muted to allow sound when explicitly clicked.
+      const videoHTML = `<video src="${src}" autoplay controls playsinline style="width:100%; height:100%; object-fit:cover; border-radius:8px; background:#000;"></video>`;
+      thumbContainer.innerHTML = videoHTML;
+      video = thumbContainer.querySelector('video');
+    } else {
+      if (video.paused) {
+        video.play();
+        video.muted = false; // Unmute on explicit interaction
+      }
+    }
+  }
+});
+
+// --- Auto Play/Pause Videos based on Viewport Visibility (TikTok/Reels style) ---
+if ('IntersectionObserver' in window) {
+  const videoObserverOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.6 // Trigger when 60% of the video is visible
+  };
+
+  window.videoObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const thumbContainer = entry.target;
+      
+      if (entry.isIntersecting) {
+        // Play the video
+        let video = thumbContainer.querySelector('video');
+        if (!video) {
+          // If video element doesn't exist yet, create it automatically
+          const src = thumbContainer.getAttribute('data-video-src');
+          if (src) {
+            // Must be muted for mobile autoplay
+            const videoHTML = `<video src="${src}" autoplay controls muted playsinline loop style="width:100%; height:100%; object-fit:cover; border-radius:8px; background:#000;"></video>`;
+            thumbContainer.innerHTML = videoHTML;
+            video = thumbContainer.querySelector('video');
           }
         }
-      }, { threshold: 0.1 }); // Kích hoạt ngay khi video lộ ra 10%
-
-      videos.forEach(video => {
-        // Đảm bảo các thuộc tính bắt buộc cho mobile
-        video.setAttribute('playsinline', '');
-        video.setAttribute('muted', '');
-        videoObserver.observe(video);
-
-        // Chỉ cho phép 1 video play cùng lúc khi click thủ công
-        video.addEventListener('play', () => {
-          videos.forEach(v => {
-            if (v !== video && !v.paused) {
-              v.pause();
-            }
+        
+        if (video) {
+          // Attempt to play
+          video.play().catch(e => {
+            console.log("Autoplay prevented:", e);
+            video.muted = true;
+            video.play().catch(err => console.log("Even muted autoplay failed:", err));
           });
-        });
-      });
+        }
+      } else {
+        // Pause the video when it goes out of view
+        const video = thumbContainer.querySelector('video');
+        if (video && !video.paused) {
+          video.pause();
+        }
+      }
+    });
+  }, videoObserverOptions);
 
-      console.log('Video auto-play and single-play logic initialized.');
+  // Observe all video thumbnails immediately since this script is injected after content load
+  const thumbnails = document.querySelectorAll('.vid-thumbnail');
+  thumbnails.forEach(thumb => {
+    window.videoObserver.observe(thumb);
+  });
+}
+
+// Dynamically correct video aspect ratio containers on load
+// We can't immediately check video dimensions without loading them.
+// Let's create an invisible video element to sniff the actual dimensions for any thumbnail.
+(function() {
+  const thumbnails = document.querySelectorAll('.vid-thumbnail');
+  thumbnails.forEach(thumb => {
+    const src = thumb.getAttribute('data-video-src');
+    if (!src) return;
+    
+    const v = document.createElement('video');
+    v.preload = 'metadata';
+    v.src = src;
+    v.onloadedmetadata = () => {
+      // If browser detects video height > width, force it to be vertical container
+      if (v.videoHeight > v.videoWidth) {
+        if (!thumb.classList.contains('vid-vertical')) {
+          thumb.classList.add('vid-vertical');
+        }
+      } else {
+        if (thumb.classList.contains('vid-vertical')) {
+          thumb.classList.remove('vid-vertical');
+        }
+      }
+    };
+  });
+})();
+
+// --- Auto-scroll cho Video Gallery (Mobile) ---
+(function initVideoGalleryAutoScroll() {
+  let attempts = 0;
+  const checkInterval = setInterval(() => {
+    const galleries = document.querySelectorAll('.video-gallery-grid');
+    if (galleries.length > 0) {
+      clearInterval(checkInterval); // Stop checking once found
+
+      // Đợi thêm một chút để đảm bảo DOM layout đã hoàn tất
+      setTimeout(() => {
+          galleries.forEach((gallery, index) => {
+            if (gallery.dataset.autoScrollInit) return;
+            
+            // Only auto-scroll on mobile where it's a horizontally scrollable flex container
+            if (window.innerWidth > 768) return; 
+
+            gallery.dataset.autoScrollInit = 'true';
+
+            // Nhân bản các item để tạo vòng lặp vô tận (Infinite Loop)
+            const originalItems = Array.from(gallery.children);
+            if (originalItems.length === 0) return;
+
+            // Clone 2 lần để đảm bảo vuốt được hai chiều
+            originalItems.forEach(item => {
+                const clone = item.cloneNode(true);
+                gallery.appendChild(clone);
+                // Đăng ký lại observer cho các thumbnail mới
+                const thumbs = clone.querySelectorAll('.vid-thumbnail');
+                if (window.videoObserver) {
+                    thumbs.forEach(thumb => window.videoObserver.observe(thumb));
+                }
+            });
+            originalItems.forEach(item => {
+                const clone = item.cloneNode(true);
+                gallery.appendChild(clone);
+                const thumbs = clone.querySelectorAll('.vid-thumbnail');
+                if (window.videoObserver) {
+                    thumbs.forEach(thumb => window.videoObserver.observe(thumb));
+                }
+            });
+
+            // Chiều cuộn luân phiên: 
+            // index chẵn (VD: 0, 2): trái sang phải (scrollLeft giảm) => dir = -1
+            // index lẻ (VD: 1, 3): phải sang trái (scrollLeft tăng) => dir = 1
+            const dir = index % 2 === 0 ? -1 : 1; 
+
+            // Tính toán kích thước của 1 block gốc ban đầu
+            const blockWidth = gallery.scrollWidth / 3;
+
+            // Thiết lập vị trí cuộn ban đầu ở giữa để có thể cuộn vô tận hai chiều
+            gallery.style.scrollBehavior = 'auto'; // Tắt mượt để nhảy ngay lập tức
+            gallery.scrollLeft = blockWidth;
+
+            let isTouching = false;
+            let playingCount = 0;
+            let speed = 0.5; // Tốc độ trôi (pixel mỗi frame)
+            let currentScrollLeftFloat = blockWidth;
+            let touchTimeout;
+
+            const scrollLoop = () => {
+                if (!isTouching && playingCount === 0) {
+                    const currentBlockWidth = gallery.scrollWidth / 3;
+                    
+                    // Đồng bộ nếu người dùng vừa vuốt tay
+                    if (Math.abs(currentScrollLeftFloat - gallery.scrollLeft) > 5) {
+                        currentScrollLeftFloat = gallery.scrollLeft;
+                    }
+
+                    // Xử lý Seamless Jump (vòng lặp vô cực)
+                    if (dir === 1) { // Đang cuộn sang trái (phải sang trái màn hình)
+                        if (currentScrollLeftFloat >= currentBlockWidth * 2 - 10) {
+                            currentScrollLeftFloat -= currentBlockWidth;
+                        }
+                        currentScrollLeftFloat += speed;
+                    } else { // Đang cuộn sang phải (trái sang phải màn hình)
+                        if (currentScrollLeftFloat <= 10) {
+                            currentScrollLeftFloat += currentBlockWidth;
+                        }
+                        currentScrollLeftFloat -= speed;
+                    }
+
+                    gallery.scrollLeft = currentScrollLeftFloat;
+                } else {
+                    currentScrollLeftFloat = gallery.scrollLeft;
+                }
+                requestAnimationFrame(scrollLoop);
+            };
+
+            // Trì hoãn một chút trước khi chạy
+            setTimeout(() => {
+                gallery.style.scrollSnapType = 'none'; // Tắt snap để trôi mượt liên tục
+                requestAnimationFrame(scrollLoop);
+            }, 500);
+
+            // Tạm dừng tự động cuộn khi người dùng chạm vuốt
+            gallery.addEventListener('touchstart', () => { 
+                isTouching = true; 
+                gallery.style.scrollSnapType = ''; // Bật lại snap để vuốt tay có khấc
+                clearTimeout(touchTimeout);
+            }, {passive: true});
+            
+            gallery.addEventListener('touchend', () => { 
+                clearTimeout(touchTimeout);
+                touchTimeout = setTimeout(() => { 
+                    isTouching = false; 
+                    if (playingCount === 0) gallery.style.scrollSnapType = 'none'; // Tắt snap lại để tự chạy
+                }, 2000); 
+            }, {passive: true});
+            
+            // Dừng cuộn khi xem video
+            gallery.addEventListener('play', (e) => {
+               if (e.target.tagName === 'VIDEO') {
+                   playingCount++;
+                   gallery.style.scrollSnapType = ''; // Bật snap giữ video ở giữa màn hình
+               }
+            }, true);
+            
+            gallery.addEventListener('pause', (e) => {
+               if (e.target.tagName === 'VIDEO') {
+                   playingCount = Math.max(0, playingCount - 1);
+                   if (playingCount === 0 && !isTouching) {
+                       gallery.style.scrollSnapType = 'none'; // Trôi tiếp
+                   }
+               }
+            }, true);
+          });
+      }, 500);
+      
     } else {
       attempts++;
-      if (attempts > 40) clearInterval(checkInterval);
+      if (attempts > 20) clearInterval(checkInterval);
     }
   }, 500);
 })();
+

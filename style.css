@@ -41,6 +41,11 @@ body {
   line-height: 1.7;
 }
 
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
 /* Fade-in / Fade-out Animation — Smoother */
 .fade-section {
   opacity: 0;
@@ -415,14 +420,18 @@ img {
 .profile-portrait-frameless {
   width: 100%;
   max-width: 450px;
-  height: auto;
-  object-fit: contain;
+  max-height: 420px;
+  object-fit: cover;
+  object-position: top center;
   display: block;
   margin: 0 auto;
   filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.9)) drop-shadow(0 0 30px rgba(212, 175, 55, 0.3));
   position: relative;
   z-index: 2;
   transition: var(--transition-bloom);
+  /* Làm mờ nhẹ phần viền cắt dưới chân để mượt mà hơn */
+  -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
 }
 
 .profile-portrait-frameless:hover {
@@ -1422,12 +1431,12 @@ img {
 
 /* Shared titles — keep from before */
 .section-title-gold {
-  font-family: var(--font-cursive);
-  font-size: clamp(3rem, 5vw, 4.5rem);
-  font-weight: 400;
+  font-family: var(--font-serif);
+  font-size: clamp(1.2rem, 3vw, 2.2rem);
+  font-weight: 600;
   margin-bottom: 0.5rem;
   line-height: 1;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
   text-transform: none !important;
   background: linear-gradient(to right,
       #b38728 0%,
@@ -1444,13 +1453,20 @@ img {
   filter: drop-shadow(0 2px 5px rgba(212, 175, 55, 0.4));
 }
 
-.section-subtitle-light {
+.section-subtitle-light, .why-desc-en, .why-desc-vi {
   font-family: var(--font-sans);
-  font-size: clamp(1rem, 1.5vw, 1.5rem);
+  font-size: clamp(0.7rem, 1.2vw, 1rem);
   color: var(--color-text-light);
   margin-bottom: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 2px;
+  line-height: 1.6;
+}
+
+.why-desc-en, .why-desc-vi {
+  text-transform: none;
+  font-size: clamp(0.7rem, 1.2vw, 0.9rem);
+  letter-spacing: 0.5px;
 }
 
 /* Floating glass tag */
@@ -1703,14 +1719,19 @@ img {
 
   .profile-title-new,
   .section-title-gold {
-    font-size: 5vw;
+    font-size: clamp(1.1rem, 4vw, 1.5rem);
     margin-bottom: 0.5vw;
   }
 
   .profile-subtitle-new,
   .section-subtitle-light {
-    font-size: 2.2vw;
+    font-size: clamp(0.65rem, 2.5vw, 0.8rem);
     margin-bottom: 1vw;
+  }
+  
+  .why-desc-en, .why-desc-vi {
+    font-size: clamp(0.65rem, 2.5vw, 0.75rem);
+    line-height: 1.5;
   }
 
   .profile-bio-en {
@@ -3247,9 +3268,33 @@ img {
   /* Tràn viền */
 }
 
+.inner-container,
+.landscape-inner {
+  position: relative;
+  z-index: 2;
+}
+
 .inner-container {
   max-width: 1200px;
   margin: 0 auto;
+}
+
+/* Thin black overlay for all sections except Hero and Profile */
+section:not(.hero-section):not(.profile-section) {
+  position: relative;
+  z-index: 1;
+}
+
+section:not(.hero-section):not(.profile-section)::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: -1;
+  pointer-events: none;
 }
 
 /* --- TYPOGRAPHY --- */
@@ -3747,17 +3792,16 @@ img {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  transition: transform 0.5s ease;
   box-sizing: border-box;
-  border: 1px solid var(--color-gold-light);
-  border-right: none;
-  animation: lb-sparkle-border 2.5s infinite alternate;
+  /* Viền phân cách mờ, sang trọng */
+  border-right: 1px solid rgba(212, 175, 55, 0.2);
 }
 
 .lb-col:last-child {
-  border-right: 1px solid var(--color-gold-light);
+  border-right: none;
 }
 
+/* Gradient tối dưới chân ảnh để làm nổi bật chữ */
 .lb-col::after {
   content: '';
   position: absolute;
@@ -3765,36 +3809,47 @@ img {
   left: 0;
   width: 100%;
   height: 40%;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.4) 50%, transparent 100%);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.2) 60%, transparent 100%);
   pointer-events: none;
   z-index: 2;
 }
 
-@keyframes lb-sparkle-border {
-  0% {
-    box-shadow: inset 0 0 5px var(--color-gold-dark);
-    border-color: var(--color-gold-dark);
-  }
-
-  50% {
-    box-shadow: inset 0 0 20px var(--color-gold-light);
-    border-color: #fff;
-  }
-
-  100% {
-    box-shadow: inset 0 0 5px var(--color-gold-dark);
-    border-color: var(--color-gold-dark);
-  }
+/* Ánh sáng điện ảnh (Cinematic vignette) ở góc trên và viền */
+.lb-col::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-shadow: inset 0px 15px 40px rgba(0,0,0,0.2), inset 0px -10px 30px rgba(0,0,0,0.3);
+  pointer-events: none;
+  z-index: 2;
 }
 
 .lb-col img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center top; /* Đẩy ảnh xuống tối đa (sát mép trên) */
   display: block;
+  /* Ken Burns Effect liên tục */
+  animation: lb-ken-burns 20s ease-in-out infinite alternate;
+  transform-origin: top center;
 }
 
-/* Bottom text on each column (Gold Metallic) */
+/* Tạo độ lệch nhịp (delay) và hướng zoom khác nhau để các cột không trôi cùng lúc */
+.lb-col:nth-child(1) img { animation-delay: 0s; transform-origin: top center; }
+.lb-col:nth-child(2) img { animation-delay: -5s; transform-origin: top right; }
+.lb-col:nth-child(3) img { animation-delay: -10s; transform-origin: center top; }
+.lb-col:nth-child(4) img { animation-delay: -15s; transform-origin: top left; }
+
+@keyframes lb-ken-burns {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.15); }
+}
+
+/* Bottom text on each column (Gold Metallic 3D) */
 .lb-top-text {
   position: absolute;
   top: auto;
@@ -3804,22 +3859,21 @@ img {
   width: 90%;
   text-align: center;
   font-family: 'Montserrat', sans-serif;
-  font-size: clamp(0.7rem, 2vw, 1.5rem);
-  font-weight: 600;
-  letter-spacing: 2px;
+  font-size: clamp(0.6rem, 1.5vw, 1.2rem);
+  font-weight: 700;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
   z-index: 5;
 
-  /* Vàng ánh kim */
-  background: linear-gradient(to right, #b38728 0%, #fcf6ba 20%, #b38728 40%, #fbf5b7 60%, #aa771c 100%);
-  background-size: 200% auto;
+  /* Gradient Vàng ánh kim nổi khối 3D */
+  background: linear-gradient(to bottom, #fff5d1 0%, #d4af37 40%, #996515 60%, #fbf5b7 100%);
   color: transparent;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  -webkit-text-stroke: 0.5px rgba(0, 0, 0, 0.8);
-  /* Viền mảnh 0.5px */
-  filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.9));
+  
+  /* Bóng đổ sâu giúp chữ bật lên trên nền ảnh */
+  filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1)) drop-shadow(0px 10px 15px rgba(0, 0, 0, 0.8));
 }
 
 /* Red overlay box "PORTFOLIO HIGHLIGHTS" */

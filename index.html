@@ -8,7 +8,8 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Dancing+Script:wght@400;600;700&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Dancing+Script:wght@400;600;700&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Caveat:wght@400;500;600;700&display=swap"
     rel="stylesheet">
 
   <link rel="stylesheet" href="./style.css">
@@ -37,18 +38,31 @@
   <div id="section-2-profile"></div>
   <div id="section-7b-lookbook"></div>
   <div id="section-2b-education"></div>
-  <div id="section-2c-why-me"></div>
-  <div id="section-3-testimonials-video"></div>
+  <div id="section-7-partners"></div>
   <div id="section-4a-testimonials-image"></div>
+  <div id="section-3-testimonials-video"></div>
+  <div id="section-2c-why-me-title"></div>
+  <div id="section-2d-style-elegant"></div>
+  <div id="section-2e-style-modern"></div>
+  <div id="section-2f-style-wedding"></div>
+  <div id="section-2g-style-sports"></div>
+  <div style="background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url('./asset/background/image.webp') top/100% auto repeat-y;">
+    <div id="section-6d-work-experience"></div>
+    <div id="section-6e-artists"></div>
+    <div id="section-6f-international-events"></div>
+    <div id="section-6g-domestic-events"></div>
+    <div id="section-6h-animating-skills"></div>
+    <div id="section-6i-other-events"></div>
+  </div>
   <div id="section-4b-testimonials-image"></div>
-  <div id="section-5a-event-expertise"></div>
-  <div id="section-5b-event-expertise"></div>
-  <div id="section-5c-event-expertise"></div>
-  <div id="section-6a-stage-moments"></div>
+  <!-- <div id="section-5a-event-expertise"></div>
+  <div id="section-5b-event-expertise"></div> -->
+  <!-- <div id="section-5c-event-expertise"></div> -->
+  <!-- <div id="section-6a-stage-moments"></div>
   <div id="section-6b-stage-moments"></div>
-  <div id="section-6c-stage-moments"></div>
+  <div id="section-6c-stage-moments"></div> -->
   <div id="section-8-featured-projects"></div>
-  <div id="section-7-partners-footer"></div>
+  <div id="section-9-footer"></div>
 
   <!-- Scroll to Top Button -->
   <button id="scrollToTopBtn" class="scroll-to-top" aria-label="Scroll to Top">
@@ -62,16 +76,22 @@
         const response = await fetch(filePath);
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         const html = await response.text();
-        document.getElementById(containerId).innerHTML = html;
+        const container = document.getElementById(containerId);
+        if (container) {
+          container.innerHTML = html;
+        }
       } catch (error) {
         console.error(`Failed to load ${filePath}:`, error);
-        document.getElementById(containerId).innerHTML = `
-          <div style="padding: 2rem; text-align: center; color: red; background: #111;">
-            <p><strong>Error loading section: ${filePath}</strong></p>
-            <p>If you are opening this file directly (file://), your browser is blocking the request due to CORS policy.</p>
-            <p>Please open the project using a local server (e.g., VS Code Live Server).</p>
-          </div>
-        `;
+        const container = document.getElementById(containerId);
+        if (container) {
+          container.innerHTML = `
+            <div style="padding: 2rem; text-align: center; color: red; background: #111;">
+              <p><strong>Error loading section: ${filePath}</strong></p>
+              <p>If you are opening this file directly (file://), your browser is blocking the request due to CORS policy.</p>
+              <p>Please open the project using a local server (e.g., VS Code Live Server).</p>
+            </div>
+          `;
+        }
       }
     }
 
@@ -81,10 +101,21 @@
         loadSection('section-1-hero', './src/sections/1-hero.html'),
         loadSection('section-2-profile', './src/sections/2-profile.html'),
         loadSection('section-2b-education', './src/sections/2b-education.html'),
+        loadSection('section-7-partners', './src/sections/7-partners.html'),
         loadSection('section-7b-lookbook', './src/sections/7b-lookbook.html'),
-        loadSection('section-2c-why-me', './src/sections/2c-why-me.html'),
-        loadSection('section-3-testimonials-video', './src/sections/3-testimonials-video.html'),
         loadSection('section-4a-testimonials-image', './src/sections/4a-testimonials-image.html'),
+        loadSection('section-3-testimonials-video', './src/sections/3-testimonials-video.html'),
+        loadSection('section-2c-why-me-title', './src/sections/2c-why-me-title.html'),
+        loadSection('section-2d-style-elegant', './src/sections/2d-style-elegant.html'),
+        loadSection('section-2e-style-modern', './src/sections/2e-style-modern.html'),
+        loadSection('section-2f-style-wedding', './src/sections/2f-style-wedding.html'),
+        loadSection('section-2g-style-sports', './src/sections/2g-style-sports.html'),
+        loadSection('section-6d-work-experience', './src/sections/6d-work-experience.html'),
+        loadSection('section-6e-artists', './src/sections/6e-artists.html'),
+        loadSection('section-6f-international-events', './src/sections/6f-international-events.html'),
+        loadSection('section-6g-domestic-events', './src/sections/6g-domestic-events.html'),
+        loadSection('section-6h-animating-skills', './src/sections/6h-animating-skills.html'),
+        loadSection('section-6i-other-events', './src/sections/6i-other-events.html'),
         loadSection('section-5a-event-expertise', './src/sections/5a-event-expertise.html'),
         loadSection('section-5b-event-expertise', './src/sections/5b-event-expertise.html'),
         loadSection('section-5c-event-expertise', './src/sections/5c-event-expertise.html'),
@@ -92,7 +123,7 @@
         loadSection('section-6b-stage-moments', './src/sections/6b-stage-moments.html'),
         loadSection('section-6c-stage-moments', './src/sections/6c-stage-moments.html'),
         loadSection('section-8-featured-projects', './src/sections/8-featured-projects.html'),
-        loadSection('section-7-partners-footer', './src/sections/7-partners-footer.html')
+        loadSection('section-9-footer', './src/sections/9-footer.html')
       ];
 
       await Promise.all(sectionPromises);
@@ -118,13 +149,28 @@
         'project-17.html',
         'project-18.html',
         'project-19.html',
-        'project-20.html'
+        'project-20.html',
+        'project-21.html',
+        'project-22.html',
+        'project-23.html',
+        'project-24.html',
+        'project-25.html',
+        'project-26.html',
+        'project-27.html',
+        'project-28.html',
+        'project-29.html',
+        'project-30.html',
+        'project-31.html',
+        'project-32.html',
+        'project-33.html',
+        'project-34.html',
+        'project-35.html'
       ];
-      
+
       const projectsContainer = document.getElementById('featured-projects-list');
       if (projectsContainer) {
         try {
-          const projectPromises = projectFiles.map(file => 
+          const projectPromises = projectFiles.map(file =>
             fetch('./src/components/projects/' + file).then(res => res.ok ? res.text() : '')
           );
           const projectHtmls = await Promise.all(projectPromises);
@@ -141,9 +187,9 @@
       curtainScript.src = './curtain.js';
       document.body.appendChild(curtainScript);
 
-      // Load additional scripts
+      // Load additional scripts with cache-busting
       const fadeScript = document.createElement('script');
-      fadeScript.src = './script.js';
+      fadeScript.src = './script.js?v=4';
       document.body.appendChild(fadeScript);
     }
 
