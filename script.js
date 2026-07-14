@@ -346,7 +346,10 @@ if ('IntersectionObserver' in window) {
           video.muted = false;
           video.play().catch(e => {
             console.log("Unmuted autoplay prevented:", e);
-            // Leave it paused so user can tap to play with sound
+            // Browser strictly requires muted autoplay on scroll. 
+            // Fallback to muted to ensure video actually plays instead of freezing at 0:00.
+            video.muted = true;
+            video.play().catch(err => console.log("Muted autoplay also failed:", err));
           });
         }
       } else {
