@@ -335,18 +335,18 @@ if ('IntersectionObserver' in window) {
           if (src) {
             // Must be muted for mobile autoplay
             const posterSrc = thumbContainer.getAttribute('data-poster') || '';
-            const videoHTML = `<video src=\"${src}\" poster=\"${posterSrc}\" autoplay controls muted playsinline loop style=\"width:100%; height:100%; object-fit:cover; border-radius:8px; background:#000;\"></video>`;
+            const videoHTML = `<video src=\"${src}\" poster=\"${posterSrc}\" autoplay controls playsinline loop style=\"width:100%; height:100%; object-fit:cover; border-radius:8px; background:#000;\"></video>`;
             thumbContainer.innerHTML = videoHTML;
             video = thumbContainer.querySelector('video');
           }
         }
         
         if (video) {
-          // Attempt to play
+          // Attempt to play with sound
+          video.muted = false;
           video.play().catch(e => {
-            console.log("Autoplay prevented:", e);
-            video.muted = true;
-            video.play().catch(err => console.log("Even muted autoplay failed:", err));
+            console.log("Unmuted autoplay prevented:", e);
+            // Leave it paused so user can tap to play with sound
           });
         }
       } else {
@@ -360,7 +360,7 @@ if ('IntersectionObserver' in window) {
   }, videoObserverOptions);
 
   // Observe all video thumbnails immediately since this script is injected after content load
-  const thumbnails = document.querySelectorAll('.vid-thumbnail');
+  const thumbnails = document.querySelectorAll('.vid-thumbnail, .vid-wrapper');
   thumbnails.forEach(thumb => {
     window.videoObserver.observe(thumb);
   });
@@ -370,7 +370,7 @@ if ('IntersectionObserver' in window) {
 // We can't immediately check video dimensions without loading them.
 // Let's create an invisible video element to sniff the actual dimensions for any thumbnail.
 (function() {
-  const thumbnails = document.querySelectorAll('.vid-thumbnail');
+  const thumbnails = document.querySelectorAll('.vid-thumbnail, .vid-wrapper');
   thumbnails.forEach(thumb => {
     const src = thumb.getAttribute('data-video-src');
     if (!src) return;
