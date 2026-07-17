@@ -26,6 +26,12 @@
   align-items: center !important;
 }
 
+/* Restore spacing for featured projects specifically */
+.featured-project-card.cinematic-slide {
+  margin-bottom: 2rem !important;
+  padding: 1rem 0 !important;
+}
+
 .landscape-inner,
 .expertise-inner {
   width: 100%;
@@ -45,7 +51,7 @@
 .project-gallery {
   width: 100% !important;
   height: auto !important;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 4 / 3;
 }
 
 @media (max-width: 768px) {
@@ -59,7 +65,7 @@
 
   .project-gallery,
   .project-model {
-    aspect-ratio: 3 / 2 !important;
+    aspect-ratio: 1 / 1 !important;
   }
 }
 
@@ -162,7 +168,7 @@
 
   /* Exactly like desktop */
   .gallery-and-model {
-    aspect-ratio: 16 / 9 !important;
+    aspect-ratio: 4 / 3 !important;
     width: 100vw !important;
     margin-left: calc(-50vw + 50%);
     /* Force full bleed if not already */
@@ -202,6 +208,9 @@
   border: none !important;
   border-radius: 0 !important;
   padding: 0 !important;
+  overflow: visible !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
 }
 
 .project-model {
@@ -215,13 +224,13 @@
   /* Keep model exactly in its flex space */
   transform: none !important;
   /* Do not scale, to prevent any pushing */
-  box-shadow: -8px 0 20px rgba(0, 0, 0, 0.4);
-  /* Stronger shadow */
+  box-shadow: none !important;
+  /* Rely on img drop-shadow instead */
 }
 
 .featured-project-card.reverse .project-model {
   margin: 0 !important;
-  box-shadow: 8px 0 20px rgba(0, 0, 0, 0.4);
+  box-shadow: none !important;
 }
 
 .project-model img {
@@ -238,7 +247,7 @@
 .project-model img {
   object-fit: contain !important;
   object-position: bottom left !important;
-  transform: scale(1.15) !important;
+  transform: scale(1.03) !important;
   transform-origin: left bottom !important;
 }
 
@@ -247,35 +256,34 @@
   transform-origin: right bottom !important;
 }
 
-@media (min-width: 993px) {
-  .project-model img {
-    transform: scale(1.4) !important;
-  }
-}
-
 
 /* 5-image Bento Grid Exact Match to DANALOG */
 .bento-gallery-5 {
   display: grid;
-  grid-template-columns: 25% 37.5% 37.5%;
-  grid-template-rows: 60% 40%;
+  grid-template-columns: 2fr 3fr 3fr;
+  grid-template-rows: 3fr 2fr;
   gap: 4px;
   height: 100%;
-  /* Visually overlap the model without breaking flex layout */
+  /* Overlap the model to create depth, border remains visible because we removed model box-shadow */
   width: 105%;
   position: relative;
 }
 
+.bento-gallery-5 .bento-item:nth-child(1) { grid-column: 1; grid-row: 1; }
+.bento-gallery-5 .bento-item:nth-child(2) { grid-column: 1; grid-row: 2; }
+.bento-gallery-5 .bento-item:nth-child(3) { grid-column: 2; grid-row: 1; }
+.bento-gallery-5 .bento-item:nth-child(4) { grid-column: 3; grid-row: 1; }
+.bento-gallery-5 .bento-item:nth-child(5) { grid-column: 2 / span 2; grid-row: 2; }
+
 .featured-project-card.reverse .bento-gallery-5 {
   left: -5%;
-  /* Shift left to overlap the model on the left */
 }
 
 /* 6-image Bento Grid for Styles */
 .bento-gallery-6 {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: 60% 40%;
+  grid-template-rows: 3fr 2fr;
   gap: 4px;
   height: 100%;
   width: 105%;
@@ -666,6 +674,41 @@
   border-radius: 0 !important;
 }
 
+/* 5-image Portrait Grid (Centered Bottom Row) */
+.grid-5-portrait {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 4px;
+  flex: 1;
+  height: 100%;
+  width: 100%;
+}
+
+.grid-5-portrait .bento-item {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box !important;
+  border: 1px solid var(--color-gold-light) !important;
+  animation: lb-sparkle-border 2.5s infinite alternate !important;
+  border-radius: 0 !important;
+}
+
+.grid-5-portrait .bento-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  border: none !important;
+  border-radius: 0 !important;
+}
+
+.grid-5-portrait .bento-item:nth-child(1) { grid-column: 1 / span 2; grid-row: 1; }
+.grid-5-portrait .bento-item:nth-child(2) { grid-column: 3 / span 2; grid-row: 1; }
+.grid-5-portrait .bento-item:nth-child(3) { grid-column: 5 / span 2; grid-row: 1; }
+.grid-5-portrait .bento-item:nth-child(4) { grid-column: 2 / span 2; grid-row: 2; }
+.grid-5-portrait .bento-item:nth-child(5) { grid-column: 4 / span 2; grid-row: 2; }
+
 @media (max-width: 768px) {
   .style-gallery-container {
     gap: 5px;
@@ -961,4 +1004,51 @@
     flex: 0 0 85%;
     scroll-snap-align: center;
   }
+}
+
+/* Hide model for specific projects */
+.featured-project-card.hide-model .project-model {
+  display: none !important;
+}
+.featured-project-card.hide-model .project-gallery {
+  width: 100% !important;
+  flex: 0 0 100% !important;
+  max-width: 100% !important;
+  aspect-ratio: 1 / 1;
+}
+.featured-project-card.hide-model .bento-gallery-5,
+.featured-project-card.hide-model .bento-gallery-6,
+.featured-project-card.hide-model .style-gallery-container {
+  width: 100% !important;
+  left: 0 !important;
+}
+
+/* Light sweeping effect for featured project cards */
+.featured-project-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.05) 40%,
+    rgba(255, 215, 0, 0.25) 50%,
+    rgba(255, 255, 255, 0.6) 51%,
+    rgba(255, 215, 0, 0.25) 52%,
+    rgba(255, 255, 255, 0.05) 60%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-25deg);
+  animation: slow-sweep 7s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  pointer-events: none;
+  z-index: 10;
+}
+
+@keyframes slow-sweep {
+  0% { left: -150%; }
+  30% { left: 250%; }
+  100% { left: 250%; } /* Pause between sweeps */
 }

@@ -126,41 +126,41 @@
 
       await Promise.all(sectionPromises);
 
-      // Load 20 featured project components concurrently
+      // Load featured project components concurrently
       const projectFiles = [
         'project-01.html',
         'project-02.html',
         'project-03.html',
-        'project-04.html',
-        'project-05.html',
-        'project-06.html',
-        'project-07.html',
         'project-08.html',
         'project-09.html',
         'project-10.html',
         'project-11.html',
-        'project-12.html',
         'project-13.html',
-        'project-14.html',
-        'project-15.html',
-        'project-16.html',
-        'project-17.html',
-        'project-18.html',
-        'project-19.html',
-        'project-20.html',
+        'project-04.html',
         'project-21.html',
+        'project-05.html',
         'project-22.html',
+        'project-06.html',
         'project-23.html',
+        'project-07.html',
         'project-24.html',
+        'project-12.html',
         'project-25.html',
+        'project-14.html',
         'project-26.html',
+        'project-15.html',
         'project-27.html',
+        'project-16.html',
         'project-28.html',
+        'project-17.html',
         'project-29.html',
-        'project-30.html',
+        'project-18.html',
         'project-31.html',
+        'project-19.html',
         'project-32.html',
+        'project-20.html',
         'project-33.html',
+        'project-30.html',
         'project-34.html',
         'project-35.html'
       ];
@@ -173,6 +173,16 @@
           );
           const projectHtmls = await Promise.all(projectPromises);
           projectsContainer.insertAdjacentHTML('beforeend', projectHtmls.join(''));
+          
+          // Re-apply alternating 'reverse' class to keep the staggered layout
+          const cards = projectsContainer.querySelectorAll('.featured-project-card');
+          cards.forEach((card, index) => {
+            if (index % 2 !== 0) {
+              card.classList.add('reverse');
+            } else {
+              card.classList.remove('reverse');
+            }
+          });
         } catch (e) {
           console.error('Failed to load projects concurrently', e);
         }
