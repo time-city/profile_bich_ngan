@@ -46,11 +46,10 @@
   <div id="section-2e-style-modern"></div>
   <div id="section-2f-style-wedding"></div>
   <div id="section-2g-style-sports"></div>
-  <div style="background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url('./asset/background/image.webp') top/100% auto repeat-y;">
+  <div
+    style="background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url('./asset/background/image.webp') top/100% auto repeat-y;">
     <div id="section-6d-work-experience"></div>
     <div id="section-6e-artists"></div>
-    <div id="section-6f-international-events"></div>
-    <div id="section-6g-domestic-events"></div>
     <div id="section-6h-animating-skills"></div>
   </div>
   <div id="section-4b-testimonials-image"></div>
@@ -72,7 +71,7 @@
   <script>
     async function loadSection(containerId, filePath) {
       try {
-        const response = await fetch(filePath);
+        const response = await fetch(filePath + '?v=7');
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         const html = await response.text();
         const container = document.getElementById(containerId);
@@ -111,8 +110,6 @@
         loadSection('section-2g-style-sports', './src/sections/2g-style-sports.html'),
         loadSection('section-6d-work-experience', './src/sections/6d-work-experience.html'),
         loadSection('section-6e-artists', './src/sections/6e-artists.html'),
-        loadSection('section-6f-international-events', './src/sections/6f-international-events.html'),
-        loadSection('section-6g-domestic-events', './src/sections/6g-domestic-events.html'),
         loadSection('section-6h-animating-skills', './src/sections/6h-animating-skills.html'),
         loadSection('section-5a-event-expertise', './src/sections/5a-event-expertise.html'),
         loadSection('section-5b-event-expertise', './src/sections/5b-event-expertise.html'),
@@ -162,18 +159,23 @@
         'project-33.html',
         'project-30.html',
         'project-34.html',
-        'project-35.html'
+        'project-35.html',
+        'project-36.html',
+        'project-37.html',
+        'project-38.html',
+        'project-39.html',
+        'project-40.html'
       ];
 
       const projectsContainer = document.getElementById('featured-projects-list');
       if (projectsContainer) {
         try {
           const projectPromises = projectFiles.map(file =>
-            fetch('./src/components/projects/' + file).then(res => res.ok ? res.text() : '')
+            fetch('./src/components/projects/' + file + '?v=12').then(res => res.ok ? res.text() : '')
           );
           const projectHtmls = await Promise.all(projectPromises);
           projectsContainer.insertAdjacentHTML('beforeend', projectHtmls.join(''));
-          
+
           // Re-apply alternating 'reverse' class to keep the staggered layout
           const cards = projectsContainer.querySelectorAll('.featured-project-card');
           cards.forEach((card, index) => {
@@ -197,7 +199,7 @@
 
       // Load additional scripts with cache-busting
       const fadeScript = document.createElement('script');
-      fadeScript.src = './script.js?v=4';
+      fadeScript.src = './script.js?v=12';
       document.body.appendChild(fadeScript);
     }
 
@@ -205,5 +207,7 @@
   </script>
 
 </body>
+
+</html>
 
 </html>
