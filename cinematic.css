@@ -260,23 +260,29 @@
 /* 5-image Bento Grid Exact Match to DANALOG */
 .bento-gallery-5 {
   display: grid;
-  grid-template-columns: 2fr 3fr 3fr;
-  grid-template-rows: 3fr 2fr;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
   gap: 4px;
   height: 100%;
-  /* Overlap the model to create depth, border remains visible because we removed model box-shadow */
   width: 105%;
   position: relative;
 }
 
-.bento-gallery-5 .bento-item:nth-child(1) { grid-column: 1; grid-row: 1; }
-.bento-gallery-5 .bento-item:nth-child(2) { grid-column: 1; grid-row: 2; }
-.bento-gallery-5 .bento-item:nth-child(3) { grid-column: 2; grid-row: 1; }
-.bento-gallery-5 .bento-item:nth-child(4) { grid-column: 3; grid-row: 1; }
-.bento-gallery-5 .bento-item:nth-child(5) { grid-column: 2 / span 2; grid-row: 2; }
+.bento-gallery-5 .bento-item:nth-child(1) {
+  grid-column: 1 / 3;
+  grid-row: 1 / 3;
+}
+
+.bento-gallery-5 .bento-item:nth-child(n+2) {
+  grid-column: span 1;
+}
 
 .featured-project-card.reverse .bento-gallery-5 {
   left: -5%;
+}
+
+.featured-project-card.reverse .bento-gallery-5 .bento-item:nth-child(1) {
+  grid-column: 3 / 5;
 }
 
 /* 6-image Bento Grid for Styles */
@@ -294,12 +300,25 @@
   left: -5%;
 }
 
-.bento-gallery-6 .bento-item:nth-child(1),
-.bento-gallery-6 .bento-item:nth-child(2) {
-  grid-column: span 2;
+.bento-gallery-6 .bento-item:nth-child(6) {
+  order: -1;
+  grid-column: 1 / 3;
+  grid-row: 1 / 4;
 }
 
-.bento-gallery-6 .bento-item:nth-child(n+3) {
+.featured-project-card.reverse .bento-gallery-6 .bento-item:nth-child(6) {
+  grid-column: 3 / 5;
+}
+
+.bento-gallery-6 .bento-item:nth-child(5) {
+  grid-column: 3 / 5;
+}
+
+.featured-project-card.reverse .bento-gallery-6 .bento-item:nth-child(5) {
+  grid-column: 1 / 3;
+}
+
+.bento-gallery-6 .bento-item:nth-child(-n+4) {
   grid-column: span 1;
 }
 
@@ -310,6 +329,7 @@
   border: 1px solid var(--color-gold-light) !important;
   animation: lb-sparkle-border 2.5s infinite alternate !important;
   border-radius: 0 !important;
+  overflow: hidden;
 }
 
 .bento-item img {
@@ -318,6 +338,13 @@
   object-fit: cover;
   border: none !important;
   border-radius: 0 !important;
+  transform-origin: center;
+  transform: scale(1.15);
+  transition: transform 0.4s ease;
+}
+
+.bento-item:hover img {
+  transform: scale(1.2);
 }
 
 /* Project Info Bar */
@@ -698,16 +725,35 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: top center;
+  object-position: center;
   border: none !important;
   border-radius: 0 !important;
 }
 
-.grid-5-portrait .bento-item:nth-child(1) { grid-column: 1 / span 2; grid-row: 1; }
-.grid-5-portrait .bento-item:nth-child(2) { grid-column: 3 / span 2; grid-row: 1; }
-.grid-5-portrait .bento-item:nth-child(3) { grid-column: 5 / span 2; grid-row: 1; }
-.grid-5-portrait .bento-item:nth-child(4) { grid-column: 2 / span 2; grid-row: 2; }
-.grid-5-portrait .bento-item:nth-child(5) { grid-column: 4 / span 2; grid-row: 2; }
+.grid-5-portrait .bento-item:nth-child(1) {
+  grid-column: 1 / span 2;
+  grid-row: 1;
+}
+
+.grid-5-portrait .bento-item:nth-child(2) {
+  grid-column: 3 / span 2;
+  grid-row: 1;
+}
+
+.grid-5-portrait .bento-item:nth-child(3) {
+  grid-column: 5 / span 2;
+  grid-row: 1;
+}
+
+.grid-5-portrait .bento-item:nth-child(4) {
+  grid-column: 2 / span 2;
+  grid-row: 2;
+}
+
+.grid-5-portrait .bento-item:nth-child(5) {
+  grid-column: 4 / span 2;
+  grid-row: 2;
+}
 
 /* 4-image Portrait Grid (2x2) */
 .grid-4-portrait {
@@ -733,7 +779,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: top center;
+  object-position: center;
   border: none !important;
   border-radius: 0 !important;
 }
@@ -853,7 +899,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: top center;
+  object-position: center;
   border-radius: 3px;
   display: block;
 }
@@ -1040,12 +1086,14 @@
 .featured-project-card.hide-model .project-model {
   display: none !important;
 }
+
 .featured-project-card.hide-model .project-gallery {
   width: 100% !important;
   flex: 0 0 100% !important;
   max-width: 100% !important;
   aspect-ratio: 1 / 1;
 }
+
 .featured-project-card.hide-model .bento-gallery-5,
 .featured-project-card.hide-model .bento-gallery-6,
 .featured-project-card.hide-model .style-gallery-container {
@@ -1061,16 +1109,14 @@
   left: -150%;
   width: 60%;
   height: 100%;
-  background: linear-gradient(
-    to right,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.05) 40%,
-    rgba(255, 215, 0, 0.25) 50%,
-    rgba(255, 255, 255, 0.6) 51%,
-    rgba(255, 215, 0, 0.25) 52%,
-    rgba(255, 255, 255, 0.05) 60%,
-    rgba(255, 255, 255, 0) 100%
-  );
+  background: linear-gradient(to right,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.05) 40%,
+      rgba(255, 215, 0, 0.25) 50%,
+      rgba(255, 255, 255, 0.6) 51%,
+      rgba(255, 215, 0, 0.25) 52%,
+      rgba(255, 255, 255, 0.05) 60%,
+      rgba(255, 255, 255, 0) 100%);
   transform: skewX(-25deg);
   animation: slow-sweep 7s cubic-bezier(0.4, 0, 0.2, 1) infinite;
   pointer-events: none;
@@ -1078,7 +1124,17 @@
 }
 
 @keyframes slow-sweep {
-  0% { left: -150%; }
-  30% { left: 250%; }
-  100% { left: 250%; } /* Pause between sweeps */
+  0% {
+    left: -150%;
+  }
+
+  30% {
+    left: 250%;
+  }
+
+  100% {
+    left: 250%;
+  }
+
+  /* Pause between sweeps */
 }
