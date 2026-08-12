@@ -1283,3 +1283,7 @@
     }
   }
 
+
+.vid-thumbnail video {
+  pointer-events: none;
+}

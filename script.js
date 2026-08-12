@@ -340,7 +340,7 @@ if ('IntersectionObserver' in window) {
           if (src) {
             // Must be muted for mobile autoplay
             const posterSrc = thumbContainer.getAttribute('data-poster') || '';
-            const videoHTML = `<video src="${src}" poster="${posterSrc}" autoplay playsinline muted loop style="width:100%; height:100%; object-fit:cover; border-radius:8px; background:#000;"></video>`;
+            const videoHTML = `<video src="${src}" poster="${posterSrc}" autoplay playsinline muted loop style="width:100%; height:100%; object-fit:cover; border-radius:8px; background:#000; pointer-events: none;"></video>`;
             thumbContainer.innerHTML = videoHTML;
             video = thumbContainer.querySelector('video');
           }
