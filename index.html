@@ -123,53 +123,57 @@
 
       // Load featured project components concurrently
       const projectFiles = [
-        'project-01.html',
-        'project-02.html',
-        'project-03.html',
-        'project-08.html',
-        'project-09.html',
-        'project-10.html',
-        'project-11.html',
-        'project-13.html',
-        'project-vid-1.html',
-        'project-04.html',
-        'project-22.html',
         'project-06.html',
-        'project-23.html',
-        'project-07.html',
-        'project-24.html',
         'project-12.html',
-        'project-25.html',
-        'project-14.html',
-        'project-26.html',
-        'project-15.html',
-        'project-45.html',
-        'project-vid-2.html',
-        'project-27.html',
+        'project-01.html',
+        'project-08.html',
         'project-16.html',
-        'project-28.html',
-        'project-29.html',
+        'project-02.html',
+        'project-09.html',
+        'project-21.html',
+        'project-03.html',
+        'project-10.html',
+        'project-04.html',
+        'project-23.html',
+        'project-13.html',
+        'project-07.html',
+        'project-14.html',
+        'project-15.html',
+        'project-11.html',
         'project-18.html',
-        'project-31.html',
         'project-19.html',
-        'project-32.html',
+        'project-36.html',
         'project-20.html',
-        'project-33.html',
+        'project-37.html',
+        'project-22.html',
+        'project-24.html',
+        'project-38.html',
+        'project-25.html',
+        'project-26.html',
+        'project-39.html',
+        'project-27.html',
+        'project-28.html',
+        'project-40.html',
+        'project-29.html',
+        'project-42.html',
         'project-30.html',
+        'project-31.html',
+        'project-43.html',
+        'project-32.html',
+        'project-33.html',
+        'project-44.html',
         'project-34.html',
         'project-35.html',
-        'project-36.html',
-        'project-37.html',
-        'project-38.html',
-        'project-39.html',
-        'project-40.html'
+        'project-vid-1.html',
+        'project-45.html',
+        'project-vid-2.html'
       ];
 
       const projectsContainer = document.getElementById('featured-projects-list');
       if (projectsContainer) {
         try {
           const projectPromises = projectFiles.map(file =>
-            fetch('./src/components/projects/' + file + '?v=12').then(res => res.ok ? res.text() : '')
+            fetch('./src/components/projects/' + file + '?v=20').then(res => res.ok ? res.text() : '')
           );
           const projectHtmls = await Promise.all(projectPromises);
           projectsContainer.insertAdjacentHTML('beforeend', projectHtmls.join(''));
@@ -197,7 +201,7 @@
 
       // Load additional scripts with cache-busting
       const fadeScript = document.createElement('script');
-      fadeScript.src = './script.js?v=12';
+      fadeScript.src = './script.js?v=13';
       document.body.appendChild(fadeScript);
     }
 

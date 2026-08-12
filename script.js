@@ -421,7 +421,10 @@ if ('IntersectionObserver' in window) {
 
             // Nhân bản các item để tạo vòng lặp vô tận (Infinite Loop)
             const originalItems = Array.from(gallery.children);
-            if (originalItems.length === 0) return;
+            if (originalItems.length <= 2) {
+                gallery.style.justifyContent = 'center';
+                return;
+            }
 
             // Clone 2 lần để đảm bảo vuốt được hai chiều
             originalItems.forEach(item => {
