@@ -173,7 +173,7 @@
       if (projectsContainer) {
         try {
           const projectPromises = projectFiles.map(file =>
-            fetch('./src/components/projects/' + file + '?v=23').then(res => res.ok ? res.text() : '')
+            fetch('./src/components/projects/' + file + '?v=24').then(res => res.ok ? res.text() : '')
           );
           const projectHtmls = await Promise.all(projectPromises);
           projectsContainer.insertAdjacentHTML('beforeend', projectHtmls.join(''));
